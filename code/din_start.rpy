@@ -10,7 +10,6 @@ init python:
 label din_start:
     $ din_onload("lock")
     $ din_screens_save_act()
-    $ din_set_null_cursor()
     scene bg black with Dissolve(2)
     $ din_current_time()
 
@@ -26,17 +25,14 @@ label din_start:
     else:
         scene din_ext_camp_entrance_day
 
-    show din_main_menu_frame
-    show din_intro_logo:
-        xalign 0.5
-        yalign 0.5
+    show din_main_menu_frame at truecenter
+
+    show din_intro_logo at truecenter
 
     with Dissolve(2)
     $ renpy.pause(0.5, hard = True) 
     play sound din_intro_sample
     $ renpy.pause(8, hard = True)
-    scene bg black with Dissolve(2)
-    $ din_loading_screen()
     scene bg black with Dissolve(2)
     $ persistent.timeofday = "day"
     $ din_set_mode_adv()
