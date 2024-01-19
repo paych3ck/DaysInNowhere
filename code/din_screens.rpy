@@ -24,17 +24,17 @@ screen din_main_menu():
     else:
         add "din_main_menu_day_anim"
 
-    add "din_main_menu_frame"
+    add "din_main_menu_frame" xalign 0.5 yalign 0.5
 
     text "{font=[din_main_menu_font]}Дни нигде{/font}":
-        size 180
+        size 135
         text_align 0.5
         xalign 0.5
         yalign 0.045
         antialias True
         kerning 2
 
-    add "din_main_menu_underline" xalign 0.5 ypos 240
+    add "din_main_menu_underline" xalign 0.5 ypos 191
 
     # if din_story_name == "ikarus":
     #     imagebutton at din_buttons_atl():
@@ -84,19 +84,60 @@ screen din_main_menu():
     #         ypos 365
     #         action [din_onload_curried("lock"), din_set_null_cursor_curried(), Hide("din_main_menu", Dissolve(1.5)), SetVariable("din_lock_quit_game_main_menu_var", False), Start("din_rolegame_story")]
 
-    textbutton ["Загрузить"]:
+    textbutton ['Выбрать историю'] at din_buttons_atl():
         style "din_main_menu_style"
         text_style "din_main_menu_style"
         xalign 0.5
-        ypos 800
+        ypos 300
+        action ShowMenu('din_story_choice')
+
+    textbutton ['Загрузить'] at din_buttons_atl():
+        style "din_main_menu_style"
+        text_style "din_main_menu_style"
+        xalign 0.5
+        ypos 433
         action NullAction()
 
-    textbutton ["Выйти"]:
+    textbutton ['Дополнительно'] at din_buttons_atl():
+        style 'din_main_menu_style'
+        text_style "din_main_menu_style"
+        xalign 0.5
+        ypos 556
+        action NullAction()
+
+    textbutton ['Настройки'] at din_buttons_atl():
+        style 'din_main_menu_style'
+        text_style "din_main_menu_style"
+        xalign 0.5
+        ypos 680
+        action NullAction()
+
+    textbutton ["Выход"] at din_buttons_atl():
         style "din_main_menu_style"
         text_style "din_main_menu_style"
         xalign 0.5
-        ypos 945
-        action NullAction()     
+        ypos 803
+        action NullAction()
+
+screen din_story_choice():
+    tag menu
+    modal True
+
+    add 'din_stories_all_closed'
+
+    add 'din_ikarus_story'
+
+    if persistent.din_winterlong_story_completed:
+        add 'din_winterlong_story' xpos 639
+
+    if persistent.din_rolegame_story_completed:
+        add 'din_rolegame_story' xpos 1253
+
+    imagebutton:
+        auto "din_back_%s"
+        xpos 80
+        ypos 980
+        action [Hide("din_story_choice"), ShowMenu("din_main_menu")]
     
 screen din_quit_main_menu():
     modal True

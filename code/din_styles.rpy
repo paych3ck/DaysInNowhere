@@ -20,9 +20,15 @@ init python:
 
     style.din_main_menu_style = Style(style.default)
     style.din_main_menu_style.font = din_main_menu_font
-    style.din_main_menu_style.size = 75
+    style.din_main_menu_style.size = 70
     style.din_main_menu_style.color = "#d1d1d1"
     style.din_main_menu_style.hover_color = "#ffffff"
+
+    style.din_story_style = Style(style.default)
+    style.din_story_style.font = din_main_menu_font
+    style.din_story_style.size = 70
+    style.din_story_style.color = "#d1d1d1"
+    style.din_story_style.hover_color = "#ffffff"
 
     style.din_titles_style = Style(style.default)
     style.din_titles_style.font = din_link_font

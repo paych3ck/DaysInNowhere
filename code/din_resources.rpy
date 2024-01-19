@@ -100,7 +100,7 @@ init python:
             render.blit(obj, (0, 0))
             return render
 
-    def din_char_define(character_name, is_nvl = False):
+    def din_char_define(character_name, is_nvl=False):
         global DynamicCharacter
         global nvl
         global din_store
@@ -109,10 +109,10 @@ init python:
         
         if character_name == "din_narrator":
             if is_nvl:
-                din_gl["din_narrator"] = Character(None, kind = nvl, what_style = "din_text_style")
+                din_gl["din_narrator"] = Character(None, kind=nvl, what_style="din_text_style")
             
             else:
-                din_gl["din_narrator"] = Character(None, what_style = "din_text_style")
+                din_gl["din_narrator"] = Character(None, what_style="din_text_style")
             
             return
         
@@ -126,11 +126,11 @@ init python:
             return
         
         if is_nvl:
-            din_gl[character_name] = DynamicCharacter("%s_name" % character_name, color = store.din_colors[character_name][din_speaker_color], kind = nvl, what_style = "din_text_style", who_suffix = ":")
+            din_gl[character_name] = DynamicCharacter("%s_name" % character_name, color = store.din_colors[character_name][din_speaker_color], kind = nvl, what_style="din_text_style", who_suffix=":")
             din_gl["%s_name" % character_name] = store.din_names[character_name]
         
         else:
-            din_gl[character_name] = DynamicCharacter("%s_name" % character_name, color = store.din_colors[character_name][din_speaker_color], what_style = "din_text_style")
+            din_gl[character_name] = DynamicCharacter("%s_name" % character_name, color=store.din_colors[character_name][din_speaker_color], what_style="din_text_style")
             din_gl["%s_name" % character_name] = store.din_names[character_name]
 
     def din_set_mode_adv():
@@ -226,22 +226,6 @@ init python:
                 continue_time_a = "<from {}>".format(pause_time_a) + file_name_a
 
             renpy.music.play(continue_time_a, "ambience", fadein = fade)
-
-    def din_predict_screens():
-        for screen_name in din_screens_list:
-            renpy.start_predict_screen(screen_name)
-
-    def din_predict_resources():
-        for folder_name in din_folders_list:
-            renpy.start_predict(folder_name)
-
-    def din_stop_predict_screens():
-        for screen_name in din_screens_list:
-            renpy.stop_predict_screen(screen_name)
-
-    def din_stop_predict_resources():
-        for folder_name in din_folders_list:
-            renpy.stop_predict(folder_name)
             
     def din_onload(type):
         global din_lock_quit
@@ -305,23 +289,15 @@ init:
     $ din_wiperight = CropMove(.5, "wiperight")
     $ din_wipeleft = CropMove(.5, "wipeleft")
 
-    # $ din_screens_list = [
-    #     "din_main_menu", "din_preferences_main_menu", "din_load_main_menu", "din_achievements", "din_quit_main_menu", "din_preferences", 
-    #     "din_save", "din_load", "din_say", "din_nvl", "din_game_menu_selector", "din_quit", "din_yesno_prompt", "din_text_history", "din_choice", "din_help"
-    # ]
-
-    # $ din_folders_list = ["din/images/bg*.*", "din/images/sprites*.*"]
-
     $ din_set_timeofday_cursor_var = False
 
     $ din_night_hours = [22, 23, 24, 0, 1, 2, 3, 4, 5, 6]
     $ din_sunset_hours = [20, 21]
     $ din_morning_hours = [7, 8]
 
-    image din_main_menu_frame = DinBlackRectangle(width=1804, height=1028, alpha=0.7)
-
-    image din_name_header = Text("Дни нигде", size = 180, font = "din/images/gui/fonts/AG_Futura Regular.ttf")
-    image din_loading_text = Text("Загрузка", size = 125, font = "din/images/gui/fonts/AG_Futura Regular.ttf")
+    image din_main_menu_frame = DinBlackRectangle(width=720, height=1080, alpha=0.6)
+    image din_main_menu_options_frame = DinBlackRectangle(width=1804, height=1028, alpha=0.7)
+    image din_intro_frame = DinBlackRectangle(width=1920, height=689, alpha=0.6)
 
     image bg din_stars_anim = din_frame_animation("din/images/bg/din_stars_anim/din_stars", 2, 1.5, True, Dissolve(1.5))
     image bg din_fireplace_winterlong_anim = din_frame_animation("din/images/bg/din_fireplace_winterlong_anim/din_fireplace_winterlong", 10, 1.8, True, Dissolve(1.2))
@@ -338,38 +314,6 @@ init:
 
         on hover:
             easein 0.5 zoom 1.018
-
-    transform din_full_rotate_repeat(l, z, x, y):
-        parallel:
-            zoom z
-            xalign x
-            yalign y 
-            rotate_pad True
-            rotate 0
-            linear l rotate 360
-            repeat
-
-    transform din_name_header_pos():
-        xalign 0.5
-        yalign 0.045
-
-    transform din_underline_pos():
-        xalign 0.5 ypos 240
-
-    transform din_loading_text_pos():
-        xalign 0.5 ypos 840
-
-    transform din_first_dot_pos():
-        xpos 1216
-        ypos 934
-
-    transform din_second_dot_pos():
-        xpos 1235
-        ypos 934
-
-    transform din_third_dot_pos():
-        xpos 1254
-        ypos 934
 
     transform din_zoom_in_center():
         xalign 0.5 yalign 0.5 zoom 1.0

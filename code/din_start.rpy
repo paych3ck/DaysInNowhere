@@ -25,7 +25,7 @@ label din_start:
     else:
         scene din_ext_camp_entrance_day
 
-    show din_main_menu_frame at truecenter
+    show din_intro_frame at truecenter
 
     show din_intro_logo at truecenter
 
