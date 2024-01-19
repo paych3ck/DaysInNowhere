@@ -85,6 +85,21 @@ init python:
     din_names["din_un"] = "Лена"
     store.din_names_list.append("din_un")
 
+    class DinBlackRectangle(renpy.Displayable):
+        def __init__(self, width, height, alpha, **kwargs):
+            super(DinBlackRectangle, self).__init__(**kwargs)
+            self.width = width
+            self.height = height
+            self.alpha = alpha
+            self.frame = Solid("#000000", xsize=self.width, ysize=self.height)
+
+        def render(self, width, height, st, at):
+            t = Transform(child=self.frame, alpha=self.alpha)
+            obj = renpy.render(t, width, height, st, at)
+            render = renpy.Render(self.width, self.height)
+            render.blit(obj, (0, 0))
+            return render
+
     def din_char_define(character_name, is_nvl = False):
         global DynamicCharacter
         global nvl
@@ -252,90 +267,6 @@ init python:
         din_hour, din_min, din_sec = din_time.split(":")
         din_hour = int(din_hour)
 
-    def din_predict_resources_d():
-        din_rightnow_r = time.time()
-
-        while time.time() - din_rightnow_r < 6:
-            din_predict_resources()
-            
-            renpy.show("din_first_dot_image", at_list = [din_first_dot_pos])
-            renpy.pause(0.7, hard = True)
-            renpy.show("din_second_dot_image", at_list = [din_second_dot_pos])
-            renpy.pause(0.7, hard = True)
-            renpy.show("din_third_dot_image", at_list = [din_third_dot_pos])
-            renpy.pause(0.7, hard = True)
-            renpy.hide("din_first_dot_image")
-            renpy.hide("din_second_dot_image")
-            renpy.hide("din_third_dot_image")
-            renpy.pause(0.7, hard = True)
-
-    def din_predict_screens_d():
-        din_rightnow_s = time.time()
-
-        while time.time() - din_rightnow_s < 3:
-            din_predict_screens()
-
-            renpy.show("din_first_dot_image", at_list = [din_first_dot_pos])
-            renpy.pause(0.7, hard = True)
-            renpy.show("din_second_dot_image", at_list = [din_second_dot_pos])
-            renpy.pause(0.7, hard = True)
-            renpy.show("din_third_dot_image", at_list = [din_third_dot_pos])
-            renpy.pause(0.7, hard = True)
-            renpy.hide("din_first_dot_image")
-            renpy.hide("din_second_dot_image")
-            renpy.hide("din_third_dot_image")
-            renpy.pause(0.7, hard = True)
-
-        renpy.show("din_first_dot_image", at_list = [din_first_dot_pos])
-        renpy.music.stop("ambience", 2)
-
-    def din_predicting():
-        din_predict_resources_d()
-        din_predict_screens_d()
-
-    def din_loading_screen():
-        renpy.pause(2, hard = True)
-
-        if din_hour in din_night_hours:
-            renpy.show("din_ext_camp_entrance_night", at_list = [din_zoom_in_center])
-            renpy.show("din_main_menu_frame")
-            renpy.show("din_name_header", at_list = [din_name_header_pos])
-            renpy.show("din_main_menu_underline", at_list = [din_underline_pos])
-            renpy.show("din_loading_text", at_list = [din_loading_text_pos])
-            renpy.music.play("sound/ambiences/ext_road_night.ogg", "ambience", fadein = 2)
-            renpy.show("din_loading_icon_night", at_list = [din_full_rotate_repeat(1.1, 0.8, 0.5, 0.55)])
-
-        elif din_hour in din_sunset_hours:
-            renpy.show("din_ext_camp_entrance_sunset", at_list = [din_zoom_in_center])
-            renpy.show("din_main_menu_frame")
-            renpy.show("din_name_header", at_list = [din_name_header_pos])
-            renpy.show("din_main_menu_underline", at_list = [din_underline_pos])
-            renpy.show("din_loading_text", at_list = [din_loading_text_pos])
-            renpy.music.play("sound/ambiences/ext_road_evening.ogg", "ambience", fadein = 2)
-            renpy.show("din_loading_icon_sunset", at_list = [din_full_rotate_repeat(1.1, 0.8, 0.5, 0.55)])
-
-        elif din_hour in din_morning_hours:
-            renpy.show("din_ext_camp_entrance_morning", at_list = [din_zoom_in_center])
-            renpy.show("din_main_menu_frame")
-            renpy.show("din_name_header", at_list = [din_name_header_pos])
-            renpy.show("din_main_menu_underline", at_list = [din_underline_pos])
-            renpy.show("din_loading_text", at_list = [din_loading_text_pos])
-            renpy.music.play("sound/ambiences/ext_road_evening.ogg", "ambience", fadein = 2)
-            renpy.show("din_loading_icon_morning", at_list = [din_full_rotate_repeat(1.1, 0.8, 0.5, 0.55)])
-
-        else:
-            renpy.show("din_ext_camp_entrance_day", at_list = [din_zoom_in_center])
-            renpy.show("din_main_menu_frame")
-            renpy.show("din_name_header", at_list = [din_name_header_pos])
-            renpy.show("din_main_menu_underline", at_list = [din_underline_pos])
-            renpy.show("din_loading_text", at_list = [din_loading_text_pos])
-            renpy.music.play("sound/ambiences/ext_road_day.ogg", "ambience", fadein = 2)
-            renpy.show("din_loading_icon_day", at_list = [din_full_rotate_repeat(1.1, 0.8, 0.5, 0.55)])
-
-        renpy.transition(Dissolve(2))
-        renpy.pause(2.0, hard = True)
-        din_predicting()
-
     def din_set_main_menu_cursor():
         config.mouse = {"default": [(din_gui_path + "misc/din_cursor.png", 0, 0)]}
 
@@ -374,18 +305,20 @@ init:
     $ din_wiperight = CropMove(.5, "wiperight")
     $ din_wipeleft = CropMove(.5, "wipeleft")
 
-    $ din_screens_list = [
-        "din_main_menu", "din_preferences_main_menu", "din_load_main_menu", "din_achievements", "din_quit_main_menu", "din_preferences", 
-        "din_save", "din_load", "din_say", "din_nvl", "din_game_menu_selector", "din_quit", "din_yesno_prompt", "din_text_history", "din_choice", "din_help"
-    ]
+    # $ din_screens_list = [
+    #     "din_main_menu", "din_preferences_main_menu", "din_load_main_menu", "din_achievements", "din_quit_main_menu", "din_preferences", 
+    #     "din_save", "din_load", "din_say", "din_nvl", "din_game_menu_selector", "din_quit", "din_yesno_prompt", "din_text_history", "din_choice", "din_help"
+    # ]
 
-    $ din_folders_list = ["din/images/bg*.*", "din/images/sprites*.*"]
+    # $ din_folders_list = ["din/images/bg*.*", "din/images/sprites*.*"]
 
     $ din_set_timeofday_cursor_var = False
 
     $ din_night_hours = [22, 23, 24, 0, 1, 2, 3, 4, 5, 6]
     $ din_sunset_hours = [20, 21]
     $ din_morning_hours = [7, 8]
+
+    image din_main_menu_frame = DinBlackRectangle(width=1804, height=1028, alpha=0.7)
 
     image din_name_header = Text("Дни нигде", size = 180, font = "din/images/gui/fonts/AG_Futura Regular.ttf")
     image din_loading_text = Text("Загрузка", size = 125, font = "din/images/gui/fonts/AG_Futura Regular.ttf")
