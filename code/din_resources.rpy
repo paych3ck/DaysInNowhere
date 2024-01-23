@@ -191,41 +191,41 @@ init python:
         renpy.show("unblink")
         renpy.pause(unblink_pause, hard = True)
 
-    def din_timing_memorization_m(type, fade):
-        global pause_time_m
-        global file_name_m
+    # def din_timing_memorization_m(type, fade):
+    #     global pause_time_m
+    #     global file_name_m
         
-        if type == "pause":
-            file_name_m = renpy.music.get_playing("music")
-            pause_time_m = renpy.music.get_pos("music")
-            renpy.music.stop("music", fadeout = fade)
+    #     if type == "pause":
+    #         file_name_m = renpy.music.get_playing("music")
+    #         pause_time_m = renpy.music.get_pos("music")
+    #         renpy.music.stop("music", fadeout = fade)
 
-        if type == "continue":
-            if pause_time_m == None:
-                continue_time_m = "<from 0>" + file_name_m
+    #     if type == "continue":
+    #         if pause_time_m == None:
+    #             continue_time_m = "<from 0>" + file_name_m
 
-            else:
-                continue_time_m = "<from {}>".format(pause_time_m) + file_name_m
+    #         else:
+    #             continue_time_m = "<from {}>".format(pause_time_m) + file_name_m
 
-            renpy.music.play(continue_time_m, "music", fadein = fade)
+    #         renpy.music.play(continue_time_m, "music", fadein = fade)
 
-    def din_timing_memorization_a(type, fade):
-        global pause_time_a
-        global file_name_a
+    # def din_timing_memorization_a(type, fade):
+    #     global pause_time_a
+    #     global file_name_a
         
-        if type == "pause":
-            file_name_a = renpy.music.get_playing("ambience")
-            pause_time_a = renpy.music.get_pos("ambience")
-            renpy.music.stop("ambience", fadeout = fade)
+    #     if type == "pause":
+    #         file_name_a = renpy.music.get_playing("ambience")
+    #         pause_time_a = renpy.music.get_pos("ambience")
+    #         renpy.music.stop("ambience", fadeout = fade)
 
-        if type == "continue":
-            if pause_time_a == None:
-                continue_time_a = "<from 0>" + file_name_a
+    #     if type == "continue":
+    #         if pause_time_a == None:
+    #             continue_time_a = "<from 0>" + file_name_a
 
-            else:
-                continue_time_a = "<from {}>".format(pause_time_a) + file_name_a
+    #         else:
+    #             continue_time_a = "<from {}>".format(pause_time_a) + file_name_a
 
-            renpy.music.play(continue_time_a, "ambience", fadein = fade)
+    #         renpy.music.play(continue_time_a, "ambience", fadein = fade)
             
     def din_onload(type):
         global din_lock_quit

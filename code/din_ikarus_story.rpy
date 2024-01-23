@@ -6,20 +6,16 @@ label din_ikarus_story:
     $ renpy.pause(2, hard = True)
 
     scene bg ext_road_day:
-        zoom 1.5
-        anchor(0.5, 0.5)
-        ypos 0.5
-        xpos 0.3
-        linear 15 xpos 0.7
+        xalign 0.5 yalign 0.5 zoom 1.0
+        easein 5 zoom 1.15 xalign 0.5 yalign 0.5 
 
     show din_hall_ikarus_story:
-        ypos 0.05
-        xpos 0.7
-        linear 15 xpos 0.2 
+        xalign 0.5 yalign 0.5 zoom 1.0
+        easein 5 zoom 1.2 xalign 0.5 yalign 0.5 
 
     show din_ikarus_intro:
-        xpos 23
-        ypos 88
+        xalign 0.5
+        yalign 0.8
 
     with dissolve
     $ renpy.pause(5, hard = True)
@@ -58,7 +54,7 @@ label din_ikarus_story:
     din_narrator "Сначала я, а потом и мой компаньон."
     din_narrator "Устроившись поудобнее, насколько это вообще возможно с помощью трёх хлипких железных ниточек, я принялся разворачивать свой летучий плащ."
     nvl clear
-	##Показать спрайт Ниточника
+    ##Показать спрайт Ниточника
     din_teapot "Что застрял? Помогай давай, солнце еще в зените."
     din_nit "Куда ты спешишь?"
     din_narrator "Он стал помогать, но всё же упускать повод для беседы было не в его привычках."
@@ -94,7 +90,7 @@ label din_ikarus_story:
     din_narrator "Он пафосно взглянул на солнце."
     din_nit "А это ты узнаешь в следующий раз."
     din_teapot "С какого такого перепуг...{nw}"
-	## Внизу важный коммент \..\
+    ## Внизу важный коммент \..\
     ##надо поискать код, чтобы менялась анимация посреди фразы
     ##антизум, постоянное резкое шатание камеры, звук ветра
     if persistent.font_size == "large":

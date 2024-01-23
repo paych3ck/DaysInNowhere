@@ -125,13 +125,16 @@ screen din_story_choice():
 
     add 'din_stories_all_closed'
 
-    add 'din_ikarus_story'
-
-    if persistent.din_winterlong_story_completed:
-        add 'din_winterlong_story' xpos 639
+    imagebutton:
+        idle 'din_ikarus_story'
+        hover 'din_ikarus_story'
+        action Jump("din_ikarus_story")
 
     if persistent.din_rolegame_story_completed:
         add 'din_rolegame_story' xpos 1253
+
+    if persistent.din_winterlong_story_completed:
+        add 'din_winterlong_story' xpos 639
 
     imagebutton:
         auto "din_back_%s"
