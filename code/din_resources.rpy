@@ -315,6 +315,16 @@ init:
         on hover:
             easein 0.5 zoom 1.018
 
+    transform din_buttons_transition():
+        on hover:
+            alpha 1.0
+            linear 0.5 alpha 0.0
+            
+        on idle:
+            alpha 0.0
+            linear 0.5 alpha 1.0
+        
+
     transform din_zoom_in_center():
         xalign 0.5 yalign 0.5 zoom 1.0
         pause 2.0

@@ -89,7 +89,7 @@ screen din_main_menu():
         text_style "din_main_menu_style"
         xalign 0.5
         ypos 300
-        action ShowMenu('din_story_choice')
+        action [Hide("din_main_menu", transition=Dissolve(10)), ShowMenu('din_story_choice')]
 
     textbutton ['Загрузить'] at din_buttons_atl():
         style "din_main_menu_style"
@@ -124,17 +124,30 @@ screen din_story_choice():
     modal True
 
     add 'din_stories_all_closed'
+    add 'din_ikarus_story_hover'
 
     imagebutton:
-        idle 'din_ikarus_story'
-        hover 'din_ikarus_story'
+        idle 'din_ikarus_story_idle'
+        at din_buttons_transition
         action Jump("din_ikarus_story")
 
-    if persistent.din_rolegame_story_completed:
-        add 'din_rolegame_story' xpos 1253
+    if persistent.din_ikarus_story_completed:
+        add 'din_winterlong_story_hover' xpos 639
+
+        imagebutton:
+            idle 'din_winterlong_story_idle'
+            xpos 639
+            at din_buttons_transition
+            action Jump("din_winterlong_story")
 
     if persistent.din_winterlong_story_completed:
-        add 'din_winterlong_story' xpos 639
+        add 'din_rolegame_story_hover' xpos 1253
+
+        imagebutton:
+            idle 'din_rolegame_story_idle' 
+            xpos 1253
+            at din_buttons_transition
+            action Jump("din_rolegame_story")
 
     imagebutton:
         auto "din_back_%s"
