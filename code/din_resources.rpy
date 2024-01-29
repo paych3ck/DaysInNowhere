@@ -252,7 +252,7 @@ init python:
         din_hour = int(din_hour)
 
     def din_set_main_menu_cursor():
-        config.mouse = {"default": [(din_gui_path + "misc/din_cursor.png", 0, 0)]}
+        config.mouse_displayable = MouseDisplayable(din_gui_path + "misc/din_cursor.png", 0, 0)
 
     din_set_main_menu_cursor_curried = renpy.curry(din_set_main_menu_cursor)
 
@@ -260,12 +260,12 @@ init python:
         global din_set_timeofday_cursor_var
 
         if din_set_timeofday_cursor_var:
-            config.mouse = {"default": [(din_gui_path + "dialogue_box/" + persistent.timeofday + "/cursor.png", 0, 0)]}
+            config.mouse_displayable = MouseDisplayable(din_gui_path + "dialogue_box/" + persistent.timeofday + "/cursor.png", 0, 0)
 
     din_set_timeofday_cursor_curried = renpy.curry(din_set_timeofday_cursor)
 
     def din_set_null_cursor():
-        config.mouse = {"default": [(din_gui_path + "misc/din_none.png", 0, 0)]}
+        config.mouse_displayable = MouseDisplayable(din_gui_path + "misc/din_none.png", 0, 0)
 
     din_set_null_cursor_curried = renpy.curry(din_set_null_cursor)
 
@@ -307,6 +307,8 @@ init:
     image din_main_menu_morning_anim = din_frame_animation("din/images/gui/main_menu/morning/din_morning", 5, 4, True, Dissolve(2))
 
     image din_gensek_silhouette_normal = im.MatrixColor("din/images/sprites/din_pi normal.png", im.matrix.tint(0, 0, 0))
+
+    image din_blank_skip = renpy.display.behavior.ImageButton(Null(1920, 1080), Null(1920, 1080), clicked=[Jump('din_after_intro')])
 
     transform din_buttons_atl():
         on idle:

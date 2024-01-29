@@ -1,5 +1,5 @@
 label din_ikarus_story:
-    $ din_set_mode_nvl()
+    $ din_set_mode_adv()
     $ persistent.timeofday = "day"
     $ persistent.sprite_time = "day"
     stop music fadeout 3
@@ -18,7 +18,7 @@ label din_ikarus_story:
         yalign 0.8
 
     with dissolve
-    $ renpy.pause(5, hard = True)
+    $ renpy.pause(3, hard = True)
     scene bg black with Dissolve(2)
     scene bg din_ext_power_line_day with Dissolve(2)
     $ din_onload("unlock")

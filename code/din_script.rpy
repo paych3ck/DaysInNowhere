@@ -41,7 +41,7 @@ init python:
         layout.LOADING = "Потерять несохраненые данные?"
         
         config.overlay_functions.append(din_set_timeofday_cursor)
-        config.mouse = {"default": [("din/images/gui/misc/din_cursor.png", 0, 0)]} 
+        #config.mouse_displayable = {"default": [("din/images/gui/misc/din_cursor.png", 0, 0)]} 
         config.main_menu_music = din_god_is_an_astronaut_tempus_horizon
         config.linear_saves_page_size = None
         persistent._file_page = "din_FilePage_1"  
@@ -55,12 +55,9 @@ init python:
             renpy.display.screen.screens[(screen_name, None)] = renpy.display.screen.screens[("din_old_" + screen_name, None)]
          
         layout.LOADING = "Загрузка приведёт к потере несохранённых данных.\nВы уверены, что хотите сделать это?"
-            
-        din_stop_predict_screens()
-        din_stop_predict_resources()
 
         config.overlay_functions.remove(din_set_timeofday_cursor)
-        config.mouse = {"default": [("images/misc/mouse/1.png", 0, 0)]}
+        config.mouse_displayable = MouseDisplayable("images/misc/mouse/1.png", 0, 0)
         config.main_menu_music = "sound/music/blow_with_the_fires.ogg"
 
         persistent.sprite_time = "day"

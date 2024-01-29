@@ -36,60 +36,12 @@ screen din_main_menu():
 
     add "din_main_menu_underline" xalign 0.5 ypos 191
 
-    # if din_story_name == "ikarus":
-    #     imagebutton at din_buttons_atl():
-    #         idle "din_ikarus"
-    #         hover "din_ikarus"
-    #         xalign 0.5
-    #         ypos 365
-    #         action [din_onload_curried("lock"), din_set_null_cursor_curried(), Hide("din_main_menu", Dissolve(1.5)), SetVariable("din_lock_quit_game_main_menu_var", False), Start("din_ikarus_story")]
-
-    #     imagebutton:
-    #         auto "din_inright_%s"
-    #         xalign 0.93
-    #         ypos 430
-    #         action SetScreenVariable("din_story_name", "winterlong")
-
-    # elif din_story_name == "winterlong":
-    #     imagebutton:
-    #         auto "din_inleft_%s"
-    #         xalign 0.07
-    #         ypos 430
-    #         action SetScreenVariable("din_story_name", "ikarus")
-
-    #     imagebutton at din_buttons_atl():
-    #         idle "din_winterlong"
-    #         hover "din_winterlong"
-    #         xalign 0.5
-    #         ypos 365
-    #         action [din_onload_curried("lock"), din_set_null_cursor_curried(), Hide("din_main_menu", Dissolve(1.5)), SetVariable("din_lock_quit_game_main_menu_var", False), Start("din_winterlong_story")]
-
-    #     imagebutton:
-    #         auto "din_inright_%s"
-    #         xalign 0.93
-    #         ypos 430
-    #         action SetScreenVariable("din_story_name", "rolegame")
-
-    # elif din_story_name == "rolegame":
-    #     imagebutton:
-    #         auto "din_inleft_%s"
-    #         xalign 0.07
-    #         ypos 430
-    #         action SetScreenVariable("din_story_name", "winterlong")
-
-    #     imagebutton at din_buttons_atl():
-    #         idle "din_rolegame"
-    #         hover "din_rolegame"
-    #         xalign 0.5
-    #         ypos 365
-    #         action [din_onload_curried("lock"), din_set_null_cursor_curried(), Hide("din_main_menu", Dissolve(1.5)), SetVariable("din_lock_quit_game_main_menu_var", False), Start("din_rolegame_story")]
-
     textbutton ['Выбрать историю'] at din_buttons_atl():
         style "din_main_menu_style"
         text_style "din_main_menu_style"
         xalign 0.5
         ypos 300
-        action [Hide("din_main_menu", transition=Dissolve(10)), ShowMenu('din_story_choice')]
+        action [Hide("din_main_menu"), ShowMenu('din_story_choice', _transition=Dissolve(1))]
 
     textbutton ['Загрузить'] at din_buttons_atl():
         style "din_main_menu_style"
@@ -129,7 +81,7 @@ screen din_story_choice():
     imagebutton:
         idle 'din_ikarus_story_idle'
         at din_buttons_transition
-        action Jump("din_ikarus_story")
+        action [Hide('din_story_choice', Dissolve(1.5)), Start("din_ikarus_story")]
 
     if persistent.din_ikarus_story_completed:
         add 'din_winterlong_story_hover' xpos 639
@@ -138,7 +90,7 @@ screen din_story_choice():
             idle 'din_winterlong_story_idle'
             xpos 639
             at din_buttons_transition
-            action Jump("din_winterlong_story")
+            action [Hide('din_story_choice', Dissolve(1.5)), Start("din_winterlong_story")]
 
     if persistent.din_winterlong_story_completed:
         add 'din_rolegame_story_hover' xpos 1253
@@ -147,11 +99,11 @@ screen din_story_choice():
             idle 'din_rolegame_story_idle' 
             xpos 1253
             at din_buttons_transition
-            action Jump("din_rolegame_story")
+            action [Hide('din_story_choice', Dissolve(1.5)), Start("din_rolegame_story")]
 
     imagebutton:
         auto "din_back_%s"
-        xpos 80
+        xpos 1780
         ypos 980
         action [Hide("din_story_choice"), ShowMenu("din_main_menu")]
     
