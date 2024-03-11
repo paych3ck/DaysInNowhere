@@ -182,50 +182,31 @@ init python:
 
     def din_blink(blink_pause):
         renpy.show("blink")
-        renpy.pause(blink_pause, hard = True)
+        renpy.pause(blink_pause, hard=True)
 
     def din_unblink(scene_name, unblink_pause):
         renpy.hide("blink")
         renpy.scene()
         renpy.show(scene_name)
         renpy.show("unblink")
-        renpy.pause(unblink_pause, hard = True)
+        renpy.pause(unblink_pause, hard=True)
 
-    # def din_timing_memorization_m(type, fade):
-    #     global pause_time_m
-    #     global file_name_m
-        
-    #     if type == "pause":
-    #         file_name_m = renpy.music.get_playing("music")
-    #         pause_time_m = renpy.music.get_pos("music")
-    #         renpy.music.stop("music", fadeout = fade)
+    def din_story_intro(_save_name, daytime, background, sprite, lbl, desc, amb): #TODO: использовать эмбиенс
+        global save_name
 
-    #     if type == "continue":
-    #         if pause_time_m == None:
-    #             continue_time_m = "<from 0>" + file_name_m
-
-    #         else:
-    #             continue_time_m = "<from {}>".format(pause_time_m) + file_name_m
-
-    #         renpy.music.play(continue_time_m, "music", fadein = fade)
-
-    # def din_timing_memorization_a(type, fade):
-    #     global pause_time_a
-    #     global file_name_a
-        
-    #     if type == "pause":
-    #         file_name_a = renpy.music.get_playing("ambience")
-    #         pause_time_a = renpy.music.get_pos("ambience")
-    #         renpy.music.stop("ambience", fadeout = fade)
-
-    #     if type == "continue":
-    #         if pause_time_a == None:
-    #             continue_time_a = "<from 0>" + file_name_a
-
-    #         else:
-    #             continue_time_a = "<from {}>".format(pause_time_a) + file_name_a
-
-    #         renpy.music.play(continue_time_a, "ambience", fadein = fade)
+        save_name = _save_name
+        persistent.timeofday = daytime
+        persistent.sprite_time = daytime
+        renpy.music.play('sound/ambiences/{}.ogg'.format(amb), 'ambience', fadein=2)
+        renpy.scene()
+        renpy.show(background)
+        renpy.show(sprite)
+        renpy.show('din_story_frame', at_list=[Transform(xalign=0.5, yalign=0.85)])
+        renpy.show('text', what=Text(lbl, xalign=0.5, yalign=0.75, style=style.din_story_label), tag='lbl')
+        renpy.show('text', what=Text(desc, xalign=0.5, yalign=0.85, style=style.din_story_description), tag='desc')
+        renpy.with_statement(dissolve)
+        renpy.pause(3.0, hard=True)
+        renpy.music.stop('ambience', 2)
             
     def din_onload(type):
         global din_lock_quit
@@ -244,7 +225,7 @@ init python:
 
     din_onload_curried = renpy.curry(din_onload)
 
-    def din_current_time():
+    def din_current_time(): #TODO: выпилить глобальные переменные
         global din_hour
         
         din_time = time.strftime("%H:%M:%S", time.localtime())
@@ -270,12 +251,15 @@ init python:
     din_set_null_cursor_curried = renpy.curry(din_set_null_cursor)
 
 init:
+    $ din_main_menu_var = True
     $ din_lock_quit_game_main_menu_var = True
     $ din_lock_quit = False
     $ din_lock_quick_menu = False
 
     $ din_take_everything = False
-    $ din_winterlong_story_bar = False
+    #$ din_winterlong_story_bar = False
+
+    #TODO: перекинуть персистенты в словарь
 
     if persistent.din_ikarus_story_completed == None:
         $ persistent.din_ikarus_story_completed = False
@@ -299,6 +283,8 @@ init:
     image din_main_menu_options_frame = DinBlackRectangle(width=1804, height=1028, alpha=0.7)
     image din_intro_frame = DinBlackRectangle(width=1920, height=689, alpha=0.6)
 
+    image din_story_frame = DinBlackRectangle(width=630, height=240, alpha=0.5)
+
     image bg din_stars_anim = din_frame_animation("din/images/bg/din_stars_anim/din_stars", 2, 1.5, True, Dissolve(1.5))
     image bg din_fireplace_winterlong_anim = din_frame_animation("din/images/bg/din_fireplace_winterlong_anim/din_fireplace_winterlong", 10, 1.8, True, Dissolve(1.2))
     image din_main_menu_day_anim = din_frame_animation("din/images/gui/main_menu/day/din_day", 5, 4, True, Dissolve(2))
@@ -312,10 +298,10 @@ init:
 
     transform din_buttons_atl():
         on idle:
-            easein 0.5 zoom 1.0
+            linear 0.5 zoom 1.0
 
         on hover:
-            easein 0.5 zoom 1.018
+            linear 0.5 zoom 1.018
 
     transform din_buttons_transition():
         on hover:
@@ -325,7 +311,6 @@ init:
         on idle:
             alpha 0.0
             linear 0.5 alpha 1.0
-        
 
     transform din_zoom_in_center():
         xalign 0.5 yalign 0.5 zoom 1.0

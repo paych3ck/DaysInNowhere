@@ -1,27 +1,10 @@
 label din_winterlong_story:
     $ renpy.block_rollback()
+    $ din_set_mode_adv()
     # pi_generic - Пионер серого непримечательного цвета
     stop music fadeout 3
-    $ renpy.pause(2, hard = True)
-
-    scene bg din_fireplace_winterlong_anim:
-        zoom 1.5
-        anchor(0.5, 0.5)
-        ypos 0.5
-        xpos 0.3
-        linear 15 xpos 0.7
-
-    show din_third_winterlong_story:
-        ypos 0.05
-        xpos 0.7
-        linear 15 xpos 0.2
-
-    show din_winterlong_intro:
-        xpos 23
-        ypos 88
-
-    with dissolve
-    $ renpy.pause(5, hard = True)
+    $ renpy.pause(2, hard=True)
+    $ din_story_intro('Длиною в зиму\nДень Третьего', 'night', 'bg din_fireplace_winterlong_anim', 'din_third normal', 'Длиною в зиму', 'День Третьего', 'forest_night')
     scene bg black with Dissolve(2)
     $ persistent.sprite_time = "sunset"
     $ persistent.timeofday = "sunset"
@@ -35,13 +18,13 @@ label din_winterlong_story:
     scene bg din_int_dining_hall_people_sunset with dissolve
     din_narrator "Я подпер кулаком голову."
     din_narrator "Вмешаться в события этого лагеря или молча наблюдать дальше?"
-    $ renpy.pause(3, hard = True)
+    $ renpy.pause(3, hard=True)
     ##Внизу важный комментарий
     ##звук резкого открытия двери.
     ##Спрайт злого чайника
     ##Музыка активная, как в боевке в лесу из ОУД
     ##Выключить эмбиэнт разговоров
-    din_narrator "От решения меня отвлек новый гость, рывком открывший дверь. Кроме двух ножей в руках -  ничего примечательного."
+    din_narrator "От решения меня отвлек новый гость, рывком открывший дверь. Кроме двух ножей в руках - ничего примечательного."
     din_pi_teapot "Девочки и мальчики, берегите ваши руки, ноги, пальчики! {w}А еще лучше - просто испаритесь на счет три."
     din_narrator "Куклы застыли в недоумении, а вот местный Пионер быстро начал собираться в окно. {w}Смышлёный парень. Знает, что с незнакомцами, у которых есть нож, лучше не разговаривать."
     din_pi_teapot "Три."
@@ -94,7 +77,6 @@ label din_winterlong_story:
     din_narrator "Я начал глазами искать что-то лекговоспламеняющееся в этой столовой."
     stop ambience fadeout 2
     scene bg black with Dissolve(2)
-    ##Вечерняя поляна в лесу у костра. "Зимний" вариант
     $ renpy.block_rollback()
     $ persistent.timeofday = "night"
     scene bg din_fireplace_winterlong_anim with dissolve
@@ -136,7 +118,7 @@ label din_winterlong_story:
 
     menu:
         "К стойке":
-            $ din_winterlong_story_bar_var = True
+            #$ din_winterlong_story_bar_var = True
             jump din_winterlong_story_bar
 
         "Подойти к учёным": 

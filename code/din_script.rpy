@@ -1,5 +1,5 @@
 init python:
-    class din_FunctionCallback(Action):
+    class DinFunctionCallback(Action):
         def __init__(self,function, *arguments):
             self.function = function
             self.arguments = arguments
@@ -41,7 +41,6 @@ init python:
         layout.LOADING = "Потерять несохраненые данные?"
         
         config.overlay_functions.append(din_set_timeofday_cursor)
-        #config.mouse_displayable = {"default": [("din/images/gui/misc/din_cursor.png", 0, 0)]} 
         config.main_menu_music = din_god_is_an_astronaut_tempus_horizon
         config.linear_saves_page_size = None
         persistent._file_page = "din_FilePage_1"  

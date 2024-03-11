@@ -1,24 +1,9 @@
 label din_ikarus_story:
+    $ renpy.block_rollback()
     $ din_set_mode_adv()
-    $ persistent.timeofday = "day"
-    $ persistent.sprite_time = "day"
     stop music fadeout 3
-    $ renpy.pause(2, hard = True)
-
-    scene bg ext_road_day:
-        xalign 0.5 yalign 0.5 zoom 1.0
-        easein 5 zoom 1.15 xalign 0.5 yalign 0.5 
-
-    show din_hall_ikarus_story:
-        xalign 0.5 yalign 0.5 zoom 1.0
-        easein 5 zoom 1.2 xalign 0.5 yalign 0.5 
-
-    show din_ikarus_intro:
-        xalign 0.5
-        yalign 0.8
-
-    with dissolve
-    $ renpy.pause(3, hard = True)
+    $ renpy.pause(2, hard=True)
+    $ din_story_intro('Икарус\nДень Чайника', 'day', 'bg ext_road_day', 'din_hall pos2 smile', 'Икарус', 'День Чайника', 'ext_road_day')
     scene bg black with Dissolve(2)
     scene bg din_ext_power_line_day with Dissolve(2)
     $ din_onload("unlock")

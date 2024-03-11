@@ -6,6 +6,14 @@ init python:
     din_main_font = "fonts/calibri.ttf"
     din_main_menu_font = din_gui_path + "fonts/AG_Futura Regular.ttf"
 
+    style.din_story_label = Style(style.default)
+    style.din_story_label.font = din_main_menu_font
+    style.din_story_label.size = 70
+
+    style.din_story_description = Style(style.default)
+    style.din_story_description.font = din_main_menu_font
+    style.din_story_description.size = 55
+
     style.din_button_none = Style(style.button)
     style.din_button_none.background = None
     style.din_button_none.hover_background = None
@@ -108,7 +116,7 @@ init python:
     style.din_settings_link_main_menu.insensitive_color = "#ffffff"
 
     style.din_settings_link_main_menu_preferences = Style(style.din_base_font)
-    style.din_settings_link_main_menu_preferences.font = din_link_font
+    style.din_settings_link_main_menu_preferences.font = din_main_menu_font
     style.din_settings_link_main_menu_preferences.size = 60
     style.din_settings_link_main_menu_preferences.kerning = 3
     style.din_settings_link_main_menu_preferences.color = "#d1d1d1"
@@ -133,7 +141,7 @@ init python:
     style.din_settings_header_main_menu_preferences_locked.selected_color = "#C0C0C0"
 
     style.din_settings_header_main_menu_quit = Style(style.din_base_font)
-    style.din_settings_header_main_menu_quit.font = din_header_font
+    style.din_settings_header_main_menu_quit.font = din_main_menu_font
     style.din_settings_header_main_menu_quit.size = 60
     style.din_settings_header_main_menu_quit.color = "#d1d1d1"
     style.din_settings_header_main_menu_quit.hover_color = "#ffffff"

@@ -1,31 +1,13 @@
 label din_rolegame_story:
     $ renpy.block_rollback()
+    $ din_set_mode_adv()
     stop music fadeout 3
-    $ renpy.pause(2, hard = True)
+    $ renpy.pause(2, hard=True)
+    $ din_story_intro('Игра по ролям\nДень Третьего', 'day', 'bg int_dining_hall_day', 'din_third normal', 'Игра по ролям', 'День Третьего', 'dining_hall_empty')
+    scene bg black with Dissolve(2)
     $ persistent.timeofday = "dungeon"
-    $ persistent.sprite_time = "day"
-
-    scene bg int_dining_hall_day:
-        zoom 1.5
-        anchor(0.5, 0.5)
-        ypos 0.5
-        xpos 0.3
-        linear 15 xpos 0.7
-
-    show din_third_rolegame_story:
-        ypos 0.05
-        xpos 0.7
-        linear 15 xpos 0.2
-
-    show din_rolegame_intro:
-        xpos 23
-        ypos 88
-
-    with dissolve
-    $ renpy.pause(5, hard = True)
-    scene bg black with Dissolve(2)    
+    $ persistent.sprite_time = "day"   
     scene bg din_int_rpg_dungeon with Dissolve(2)
-    $ din_set_timeofday_cursor_var = True
     $ din_onload("unlock")
     play music din_pillars_of_eternity_elmshore fadein 2
     play ambience ambience_catacombs fadein 2
@@ -43,7 +25,7 @@ label din_rolegame_story:
     din_narrator "Пока Чайник бросал два игральных кубика, Ниточник аккуратно поправлял все свои листы с заготовками событий."
     din_narrator "В общей столовой было как обычно в обед. Все в большинстве своем сбивались в группки за столами, дабы что-то обсудить или чем-то заняться."
     din_narrator "Обед отличался от любого другого времени суток исключительно тем, что часть народу сидела на кухне, пытаясь приготовить что-то сьедобное."
-    din_teapot "Шесть и три плюс бонус к внимательности...{w=1} одинадцать. Итого - двадцатка. "
+    din_teapot "Шесть и три плюс бонус к внимательности...{w=1} одинадцать. Итого - двадцатка."
     din_narrator "Нит в очередной раз пожалел, что позволил Чайнику получить такой огромный бонус, но вслух ничего не сказал."
     din_nit "Ладно, пробросил. {w}{i}В подземном этаже без окон, напоминающем заброшенный склад гильдии торговцев, ты замечаешь непримечательные бумаги, а древние погнутые доспехи, сваленные в дальнем углу, похоже, лучатся от сильной магии.{/i} "
     din_nit "{i}Еще дальше, помимо грязных столов и сломанных инструментов ты обнаружил секретный рычаг, стоящий правее чёрной двери в кладовку.{/i}"
@@ -479,13 +461,7 @@ label din_rg_wait:
     din_pi3 "Д-да ничего..."
     din_narrator "От неожиданности ближний ко мне сделал шаг назад и опустил руку с обьявлением, так что я смог выхватить пару строк."
     din_narrator "...Третьего, 1 услуга от..."
-
-    if din_winterlong_story_bar:
-        "Генсек за отказ мстит? {w}Я, конечно, всё понимаю, но чего так дёшево?"
-
-    else:
-        din_narrator "Небось опять кто-то учит молодёжь заказы нормально оформлять, задавая невыполнимые условия."
-
+    din_narrator "Небось опять кто-то учит молодёжь заказы нормально оформлять, задавая невыполнимые условия."
     din_narrator "Лучше бы занялись чем-то интересным."
     din_third "Плохой выбор задания. Говорят, этот Третий чудовищно силён."
     din_narrator "По глазам этих двоих было видно что они только недавно начали общую столовую посещать, а различать других Пионеров для них вообще было тёмным лесом."
@@ -643,7 +619,7 @@ label din_rg_final:
     din_narrator "Девушки, открыв рты, наблюдали за нашими разборками."
     din_narrator "Их внимание начало меня напрягать, поэтому по моему щелчку пальцев мы перенеслись в другой лагерь."
     din_th "Черт, теперь весь спектакль заново разыгрывать."
-    $ renpy.pause(5, hard = True)
+    $ renpy.pause(5, hard=True)
 
 label din_rolegame_story_interlude:
     $ renpy.block_rollback()
