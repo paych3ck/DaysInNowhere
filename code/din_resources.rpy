@@ -168,7 +168,7 @@ init python:
 
     din_reload_names()
 
-    def din_frame_animation(image_name, frames_quantity, retention, loop, transition, start = 1, **properties):
+    def din_frame_animation(image_name, frames_quantity, retention, loop, transition, start=1, **properties):
         anim_args = []
         
         for i in xrange(start, start + frames_quantity):
@@ -287,6 +287,7 @@ init:
 
     image bg din_stars_anim = din_frame_animation("din/images/bg/din_stars_anim/din_stars", 2, 1.5, True, Dissolve(1.5))
     image bg din_fireplace_winterlong_anim = din_frame_animation("din/images/bg/din_fireplace_winterlong_anim/din_fireplace_winterlong", 10, 1.8, True, Dissolve(1.2))
+    image bg din_stars_bush_anim = din_frame_animation('din/images/bg/din_stars_bush_anim/din_stars_bush', 15, 1.8, True, Dissolve(1.2))
     image din_main_menu_day_anim = din_frame_animation("din/images/gui/main_menu/day/din_day", 5, 4, True, Dissolve(2))
     image din_main_menu_night_anim = din_frame_animation("din/images/gui/main_menu/night/din_night", 5, 4, True, Dissolve(2))
     image din_main_menu_sunset_anim = din_frame_animation("din/images/gui/main_menu/sunset/din_sunset", 5, 4, True, Dissolve(2))
