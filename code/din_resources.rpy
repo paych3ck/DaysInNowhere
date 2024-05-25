@@ -61,17 +61,17 @@ init python:
     din_names["din_gensek"] = "Генсек"
     store.din_names_list.append("din_gensek")
 
-    din_colors["din_pi1"] = {"speaker_color": (255, 204, 102, 255)}
+    din_colors["din_pi1"] = {"speaker_color": (204, 204, 0)}
     din_names["din_pi1"] = "Пионер"
     store.din_names_list.append("din_pi1")
 
-    din_colors["din_pi2"] = {"speaker_color": (72, 61, 139, 255)}
+    din_colors["din_pi2"] = {"speaker_color": (102, 102, 153)}
     din_names["din_pi2"] = "Пионер"
     store.din_names_list.append("din_pi2")
 
-    din_colors["din_pi3"] = {"speaker_color": "#FFFFE0"}
-    din_names["din_pi3"] = "Пионер"
-    store.din_names_list.append("din_pi3")
+    din_colors["din_pi_generic"] = {"speaker_color": (94, 91, 90)}
+    din_names["din_pi_generic"] = "Пионер"
+    store.din_names_list.append("din_pi_generic")
 
     din_colors["din_dv"] = {"speaker_color": "#ffaa00"}
     din_names["din_dv"] = "Алиса"
@@ -99,6 +99,28 @@ init python:
             render = renpy.Render(self.width, self.height)
             render.blit(obj, (0, 0))
             return render
+
+    def din_shrinking_text_tag(tag, argument, contents):
+        if persistent.font_size == "large":
+            start_size = 32
+
+        elif persistent.font_size == "small":
+            start_size = 28
+        
+        modified_contents = []
+        current_size = start_size
+        
+        for kind, text in contents:
+            if kind == renpy.TEXT_TEXT:
+                for char in text:
+                    size_tag = "size={}".format(current_size)
+                    modified_contents.append((renpy.TEXT_TAG, size_tag))
+                    modified_contents.append((renpy.TEXT_TEXT, char))
+                    modified_contents.append((renpy.TEXT_TAG, "/size"))
+                    
+                    current_size -= 1
+
+        return modified_contents
 
     def din_char_define(character_name, is_nvl=False):
         global DynamicCharacter
@@ -293,7 +315,7 @@ init:
     image din_main_menu_sunset_anim = din_frame_animation("din/images/gui/main_menu/sunset/din_sunset", 5, 4, True, Dissolve(2))
     image din_main_menu_morning_anim = din_frame_animation("din/images/gui/main_menu/morning/din_morning", 5, 4, True, Dissolve(2))
 
-    image din_gensek_silhouette_normal = im.MatrixColor("din/images/sprites/din_pi normal.png", im.matrix.tint(0, 0, 0))
+    image din_gensek silhouette normal = im.MatrixColor("din/images/sprites/gensek/normal/din_gensek stay normal.png", im.matrix.tint(0, 0, 0))
 
     image din_blank_skip = renpy.display.behavior.ImageButton(Null(1920, 1080), Null(1920, 1080), clicked=[Jump('din_after_intro')])
 

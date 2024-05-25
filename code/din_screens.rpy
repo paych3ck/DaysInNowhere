@@ -109,8 +109,8 @@ screen din_story_choice():
 
     imagebutton:
         auto "din_back_%s"
-        xpos 1780
-        ypos 980
+        xpos 1800
+        ypos 1000
         action [Hide("din_story_choice"), ShowMenu("din_main_menu")]
 
 screen din_load_main_menu():
