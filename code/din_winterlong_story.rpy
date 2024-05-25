@@ -36,7 +36,7 @@ label din_winterlong_story:
     din_narrator "Быстрым движением гость выкинул нож, который прочертил прямую траекторию и просвистел в паре сантиметров от головы Алисы."
     din_narrator "Потом снаряд с лязгом упал на пол, а стрелок грозно поигрывал в руке вторым."
     din_narrator "Куклы сменили смятение на панику в своих пустых глазах. Смекнули, что сейчас будет нечто не очень хорошее."
-    scene bg din_int_dining_hall_sunset_crashed with dissolve
+    scene bg din_int_dining_hall_sunset_crashed with fade
     ##звук суматохи
     din_narrator "Они начали резко вставать, опрокидывая стулья, и панически искать пути побега."
     din_pi_teapot "Выход на кухне, если кому интересно."
@@ -114,6 +114,7 @@ label din_winterlong_story:
     din_narrator "Когда я поднялся, то большинство мест у костра пустовали. Все занялись более «живыми» занятиями."
     din_narrator "В другом конце поляны красовалась состоящая из пары досок барная стойка с изрядным запасом Столичной. Многим было сложно справиться с эмоциями."
     din_narrator "Небольшая группа любопытствующих пошла послушать речи исследователей."
+    stop music fadeout 3
 
     menu:
         "К стойке":
@@ -135,7 +136,6 @@ label din_winterlong_story_bar:
     din_narrator "Бармен же не делал никаких лишних движений."
     din_th "Вряд ли этим бы занимался кто-то кроме любителей посмотреть на чужую печаль."
     din_th "Или... {w}Я ошибаюсь? {w}Буду надеяться, что осталось хоть что-то, в чём я могу ошибаться."
-    show din_pi normal at center with dissolve
     din_narrator "Забрав стакан, я отсел за стол к одинокому Пионеру, безвольно допивавшему очередную бутылку."
     din_narrator "Вот эту-то личность я хорошо знал."
     din_narrator "Огонёк когда-то был невероятным. Он излучал счастье и радость, чуть ли не единственный."
@@ -148,7 +148,6 @@ label din_winterlong_story_bar:
     din_narrator "Возможно, мы восстановились в одну смену."
     din_narrator "В любом случае наша очередь - только вопрос времени."
     din_narrator "Наш срок изменений может стремиться к бесконечности, но... {w}Мы здесь. {w}Бесконечность непременно наступит."
-    hide din_pi normal with dissolve
     din_narrator "Мой поток мыслей прервали негромкие шаги рядом." 
     show din_gensek silhouette normal at center with dissolve
     din_narrator "Кто-то проходил мимо, но, заметив меня, придвинул соседний стул и сел к нам."
@@ -236,6 +235,7 @@ label din_winterlong_story_science:
     din_teapot "Эту теорию у меня пока не было желания рассмотреть, поговорим о ней после результатов. {w}На этом всё, спасибо."
     hide din_hall with dissolve
     din_narrator "Он в тишине сошел с трибуны. Поискав свободное место, заметил меня."
+    show din_hall pos2 smile_burns at center with dissolve
     din_teapot "О, какая компания! Ты вовремя. {w}Сыграем в города? {w}Райцентр!"
     din_third "Райцентр."
     din_teapot "..."
@@ -259,10 +259,11 @@ label din_winterlong_story_science:
     din_third "Не вижу противоречия."
     din_teapot "Да, да, противоречия нет, никто не спорит."
     din_narrator "Он примирительно поднял руки вверх."
-    $ renpy.pause(2, hard = True)
+    $ renpy.pause(2, hard=True)
     din_narrator "Его взгляд проскользил где-то над моей головой, за спину."
     din_teapot "О, это тебя обрадует!"
     din_third "Очень в этом сомневаюсь."
+    scene bg din_fireplace_winterlong_anim with dissolve
     din_narrator "Когда я развернулся, ничего сначала не бросилось в глаза."
     din_narrator "Вернее, не было понятно где искать - проблему мог создать кто-угодно."
     din_narrator "Разве что дальше всего от костра, на отшибе сегодняшнего праздника двое личностей о чём-то спорили."
@@ -276,7 +277,7 @@ label din_winterlong_story_science:
     din_narrator "Моё желание улаживать детские разборки измерялось отрицательными числами, но статус обязывал."
     din_th "Сколько раз повторять: ЛЮБОЕ насилие сегодня запрещено! Но нет, всега найдется недоверчивый новичок, который посчитает себя выше правил!"   
     ## появляются два тёмных силуэта дефолтных пионеров.
-    scene bg ext_polyana_night with dissolve
+    #scene bg ext_polyana_night with dissolve
     show silhouette din_normal at left as silhouette1
     show silhouette din_normal at right as silhouette2
     with dissolve
@@ -286,7 +287,10 @@ label din_winterlong_story_science:
     din_pi2 "Ты что, правда веришь в эту тупость? {w}Послушай, твоя ненаглядная с каждым, кого ты сегодня мог встретить, «уединялась» минимум раза...{nw}"
     ##вспышка, фон стандартной ночной поляны (Третий портировал этих двоих и себя)
     play sound din_sfx["din_portal_use"]
-    scene bg ext_polyana_night with flash
+    scene bg ext_polyana_night 
+    show silhouette din_normal at left as silhouette1
+    show silhouette din_normal at right as silhouette2
+    with flash
     din_th "Отлично, свидетелей теперь нет."
     din_narrator "Неожиданная смена обстановки заставила их ненадолго остановить разговор."
     din_narrator "Теперь они, наконец, изволили меня заметить."
@@ -394,7 +398,7 @@ label din_winterlong_story_interlude:
     din_th "{b}Ничего.{/b}"
     din_th "Небо всё того же цвета, тени той же длины."
     din_th "Даже мы сами. Мы не захотели ни есть, ни спать, не устали ни капли."
-    din_th "Повезло, что хоть собственные мысли мы можем менять."
+    din_th "Повезло, что хоть собственные мысли мы можем менять." #FIX THIS
     din_th "Он был прав. {w}Здесь попросту не от чего проснуться."
     din_th "В этом и была его просьба — разбудить через сорок два часа."
     din_th "Думаю, в конце концов мы оба уснем, чтобы избавиться от голоса в своей голове."

@@ -82,7 +82,7 @@ label din_ikarus_story:
         yalign 0.5
         zoom 1.0
         parallel:
-            linear 0.8 zoom 1.05
+            linear 0.8 zoom 1.1
 
         parallel:
             ease 0.8 xalign 0.48
@@ -102,8 +102,9 @@ label din_ikarus_story:
     din_narrator "Только сейчас посмотрел вниз и понял НАСКОЛЬКО тут высоко!"
     din_th "Несмотретьвниз-несмотретьвниз-несмотретьвниз-несмотретьвниз..."
     show din_nit smil3_r at center with dissolve
-    din_narrator "Пока ветер вертел мною во все стороны мне удалось выхватить лыбящуюся рожу Нита."
+    $ renpy.pause(0.2, hard=True)
     hide din_nit with dissolve
+    din_narrator "Пока ветер вертел мною во все стороны мне удалось выхватить лыбящуюся рожу Нита."
     din_teapot "ЕСЛИ Я ВЫЖИВУ, ТО ПРЕВРАЩУ ТВОЮ ЖИЗНЬ В СУЩИЙ АД, СЛЫШИШЬ?!"
     din_th "И если не выживу, тоже превращу!"
     din_th "Он точно умеет читать по губам. Надеюсь, он уже начал прощаться с родственниками!"

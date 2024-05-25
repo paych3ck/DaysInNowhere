@@ -57,7 +57,7 @@ init python:
     din_names["din_pi_teapot"] = "Пионер"
     store.din_names_list.append("din_pi_teapot")
 
-    din_colors["din_gensek"] = {"speaker_color": (139, 0, 0, 255)}
+    din_colors["din_gensek"] = {"speaker_color": (209, 209, 65, 255)}
     din_names["din_gensek"] = "Генсек"
     store.din_names_list.append("din_gensek")
 
