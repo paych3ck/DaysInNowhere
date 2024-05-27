@@ -213,7 +213,7 @@ init python:
         renpy.show("unblink")
         renpy.pause(unblink_pause, hard=True)
 
-    def din_story_intro(_save_name, daytime, background, sprite, lbl, desc, amb): #TODO: использовать эмбиенс
+    def din_story_intro(_save_name, daytime, background, sprite, lbl, desc, amb):
         global save_name
 
         save_name = _save_name
@@ -226,7 +226,26 @@ init python:
         renpy.show('din_story_frame', at_list=[Transform(xalign=0.5, yalign=0.85)])
         renpy.show('text', what=Text(lbl, xalign=0.5, yalign=0.75, style=style.din_story_label), tag='lbl')
         renpy.show('text', what=Text(desc, xalign=0.5, yalign=0.85, style=style.din_story_description), tag='desc')
-        renpy.with_statement(dissolve)
+        renpy.with_statement(Dissolve(1.5))
+        renpy.pause(3.0, hard=True)
+        renpy.music.stop('ambience', 2)
+
+    def din_interlude_intro(interlude_name):
+        global save_name
+
+        save_name = 'Интерлюдия.\nТретий и Ниточник.\n{}'.format(interlude_name)
+        persistent.timeofday = 'day'
+        persistent.sprite_time = 'day'
+        renpy.music.play('sound/ambiences/ext_road_day.ogg', 'ambience', fadein=2)
+        renpy.scene()
+        renpy.show('bg din_ext_camp_plain_sight_day')
+        renpy.show('din_nit normal_r', at_list=[Transform(xalign=0.1, yalign=0.5)])
+        renpy.show('din_third normal', at_list=[Transform(xalign=0.9, yalign=0.5)])
+        renpy.show('din_interlude_frame', at_list=[Transform(xalign=0.5, yalign=0.85)])
+        renpy.show('text', what=Text('Интерлюдия', xalign=0.5, yalign=0.7, style=style.din_story_label), tag='lbl')
+        renpy.show('text', what=Text('Третий и Ниточник', xalign=0.5, yalign=0.775, style=style.din_story_description), tag='desc')
+        renpy.show('text', what=Text(interlude_name, xalign=0.5, yalign=0.85, style=style.din_interlude_name), tag='interl_name')
+        renpy.with_statement(Dissolve(1.5))
         renpy.pause(3.0, hard=True)
         renpy.music.stop('ambience', 2)
             
@@ -306,6 +325,7 @@ init:
     image din_intro_frame = DinBlackRectangle(width=1920, height=689, alpha=0.6)
 
     image din_story_frame = DinBlackRectangle(width=630, height=240, alpha=0.5)
+    image din_interlude_frame = DinBlackRectangle(width=630, height=290, alpha=0.5)
 
     image bg din_stars_anim = din_frame_animation("din/images/bg/din_stars_anim/din_stars", 2, 1.5, True, Dissolve(1.5))
     image bg din_fireplace_winterlong_anim = din_frame_animation("din/images/bg/din_fireplace_winterlong_anim/din_fireplace_winterlong", 10, 1.8, True, Dissolve(1.2))
@@ -324,7 +344,7 @@ init:
             linear 0.5 zoom 1.0
 
         on hover:
-            linear 0.5 zoom 1.018
+            linear 0.5 zoom 1.02
 
     transform din_buttons_transition():
         on hover:

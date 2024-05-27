@@ -82,30 +82,30 @@ screen din_story_choice():
 
     add 'din_stories_all_closed'
 
-    add 'din_ikarus_story_hover'
+    #add 'din_ikarus_story_hover'
+
+    # imagebutton:
+    #     idle 'din_ikarus_story_idle'
+    #     at din_buttons_transition
+    #     action [Hide('din_story_choice', Dissolve(1.5)), Start("din_ikarus_story")]
+
+    #if persistent.din_ikarus_story_completed:
+    add 'din_winterlong_story_hover' xpos 639
 
     imagebutton:
-        idle 'din_ikarus_story_idle'
+        idle 'din_winterlong_story_idle'
+        xpos 639
         at din_buttons_transition
-        action [Hide('din_story_choice', Dissolve(1.5)), Start("din_ikarus_story")]
+        action [Hide('din_story_choice', Dissolve(1.5)), Start("din_winterlong_story")]
 
-    if persistent.din_ikarus_story_completed:
-        add 'din_winterlong_story_hover' xpos 639
+    # if persistent.din_winterlong_story_completed:
+    #     add 'din_rolegame_story_hover' xpos 1253
 
-        imagebutton:
-            idle 'din_winterlong_story_idle'
-            xpos 639
-            at din_buttons_transition
-            action [Hide('din_story_choice', Dissolve(1.5)), Start("din_winterlong_story")]
-
-    if persistent.din_winterlong_story_completed:
-        add 'din_rolegame_story_hover' xpos 1253
-
-        imagebutton:
-            idle 'din_rolegame_story_idle' 
-            xpos 1253
-            at din_buttons_transition
-            action [Hide('din_story_choice', Dissolve(1.5)), Start("din_rolegame_story")]
+    #     imagebutton:
+    #         idle 'din_rolegame_story_idle' 
+    #         xpos 1253
+    #         at din_buttons_transition
+    #         action [Hide('din_story_choice', Dissolve(1.5)), Start("din_rolegame_story")]
 
     imagebutton:
         auto "din_back_%s"

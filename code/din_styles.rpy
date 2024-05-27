@@ -14,6 +14,10 @@ init python:
     style.din_story_description.font = din_main_menu_font
     style.din_story_description.size = 55
 
+    style.din_interlude_name = Style(style.default)
+    style.din_interlude_name.font = din_main_menu_font
+    style.din_interlude_name.size = 40
+
     style.din_button_none = Style(style.button)
     style.din_button_none.background = None
     style.din_button_none.hover_background = None

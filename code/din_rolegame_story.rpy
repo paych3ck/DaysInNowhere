@@ -16,8 +16,8 @@ label din_rolegame_story:
     $ din_timing_memorization_m("pause", 1)
     $ din_timing_memorization_a("pause", 1)
     scene bg int_dining_hall_day
-    show osd_hall pos2 smile3_burns at left
-    show osd_nit normal_l at right
+    # show osd_hall pos2 smile3_burns at left
+    # show osd_nit normal_l at right
     with din_wiperight
     play ambience din_voices fadein 2
     $ renpy.block_rollback()
