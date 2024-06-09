@@ -1,5 +1,38 @@
+init python:
+    din_g = Gallery()
+    din_page = 0
+    din_g.transition = fade
+    din_g.locked_button = "din/images/gui/save_load/main_menu/thumbnail_idle.png"
+    din_g.navigation = False
+
+    din_rows = 4
+    din_cols = 3
+    din_cells  = din_rows * din_cols
+
+    din_gallery_bg_list = [
+    "din_ext_power_line_day", "din_food_normal_sunset", 
+    "din_int_dining_hall_people_sunset", "din_int_dining_hall_sunset_crashed", 
+    "din_int_rpg_dungeon", "din_ext_bar_night",
+    "din_ext_scene_night"
+    ]
+
+    for bg in din_gallery_bg_list:
+        din_g.button(bg)
+        din_g.image(im.Crop("din/images/bg/" + bg + ".png", (0, 0, 1920, 1080)))
+        din_g.unlock("bg " + bg)
+
+    din_music_box = {
+        "God Is An Astronaut — Tempus Horizon": din_god_is_an_astronaut_tempus_horizon,
+        "The last days — The Time Will Never Come Back": din_the_last_days_the_time_will_never_come_back,
+    }
+
+    din_mr = MusicRoom(fadeout=1.0)
+
+    for music_name in din_music_box.values():
+        din_mr.add(music_name)
+
 screen din_main_menu():
-    tag menu 
+    tag menu
     modal True
 
     key "game_menu":
@@ -8,25 +41,14 @@ screen din_main_menu():
     key "K_F1":
         action NullAction()
 
-    $ din_current_time()
-
-    if din_hour in din_night_hours:
-        add "din_main_menu_night_anim"
-
-    elif din_hour in din_sunset_hours:
-        add "din_main_menu_sunset_anim"
-
-    elif din_hour in din_morning_hours:
-        add "din_main_menu_morning_anim"
-
-    else:
-        add "din_main_menu_day_anim"
+    add 'din_main_menu_' + din_current_time() + '_anim'
 
     if din_main_menu_var:
         add "din_main_menu_frame" xalign 0.5 yalign 0.5
 
-        text "{font=[din_main_menu_font]}Дни нигде{/font}":
+        text "Дни нигде":
             size 135
+            font din_main_menu_font
             text_align 0.5
             xalign 0.5
             yalign 0.045
@@ -54,7 +76,7 @@ screen din_main_menu():
             text_style "din_main_menu_style"
             xalign 0.5
             ypos 556
-            action NullAction()
+            action [SetVariable('din_main_menu_var', False), ShowMenu('din_extra')]
 
         textbutton ['Настройки'] at din_buttons_atl():
             style 'din_main_menu_style'
@@ -82,36 +104,256 @@ screen din_story_choice():
 
     add 'din_stories_all_closed'
 
-    #add 'din_ikarus_story_hover'
-
-    # imagebutton:
-    #     idle 'din_ikarus_story_idle'
-    #     at din_buttons_transition
-    #     action [Hide('din_story_choice', Dissolve(1.5)), Start("din_ikarus_story")]
-
-    #if persistent.din_ikarus_story_completed:
-    add 'din_winterlong_story_hover' xpos 639
+    add 'din_ikarus_story_hover'
 
     imagebutton:
-        idle 'din_winterlong_story_idle'
-        xpos 639
+        idle 'din_ikarus_story_idle'
         at din_buttons_transition
-        action [Hide('din_story_choice', Dissolve(1.5)), Start("din_winterlong_story")]
+        action [Hide('din_story_choice', Dissolve(1.5)), Start("din_ikarus_story")]
 
-    # if persistent.din_winterlong_story_completed:
-    #     add 'din_rolegame_story_hover' xpos 1253
+    if persistent.din_flags['din_ikarus_story_completed']:
+        add 'din_winterlong_story_hover' xpos 639
 
-    #     imagebutton:
-    #         idle 'din_rolegame_story_idle' 
-    #         xpos 1253
-    #         at din_buttons_transition
-    #         action [Hide('din_story_choice', Dissolve(1.5)), Start("din_rolegame_story")]
+        imagebutton:
+            idle 'din_winterlong_story_idle'
+            xpos 639
+            at din_buttons_transition
+            action [Hide('din_story_choice', Dissolve(1.5)), Start("din_winterlong_story")]
+
+    if persistent.din_flags['din_winterlong_story_completed']:
+        add 'din_rolegame_story_hover' xpos 1253
+
+        imagebutton:
+            idle 'din_rolegame_story_idle' 
+            xpos 1253
+            at din_buttons_transition
+            action [Hide('din_story_choice', Dissolve(1.5)), Start("din_rolegame_story")]
 
     imagebutton:
         auto "din_back_%s"
         xpos 1800
         ypos 1000
         action [Hide("din_story_choice"), ShowMenu("din_main_menu")]
+
+screen din_extra():
+    modal True
+
+    key "K_F1":
+        action NullAction()
+    
+    if not din_main_menu_var: 
+        add "din_main_menu_options_frame" xalign 0.5 yalign 0.5
+        
+        text "Дополнительно":
+            font din_main_menu_font
+            size 70
+            xalign 0.5
+            ypos 33
+            antialias True
+            kerning 2
+
+        textbutton "Музыка":
+            style "din_log_button" 
+            text_style "din_settings_link_main_menu_preferences" 
+            xalign 0.5
+            yalign 0.3
+            action [Hide("din_extra"), ShowMenu("din_music_room")]
+
+        textbutton "Галерея":
+            style "din_log_button" 
+            text_style "din_settings_link_main_menu_preferences" 
+            xalign 0.5
+            yalign 0.5
+            action [Hide("din_extra"), ShowMenu("din_background_gallery")]
+
+        textbutton "Персонажи":
+            style "din_log_button" 
+            text_style "din_settings_link_main_menu_preferences" 
+            xalign 0.5
+            yalign 0.7
+            action [Hide("din_extra"), ShowMenu("din_characters")]
+
+        textbutton "Назад":
+            style "din_log_button" 
+            text_style "din_settings_link_main_menu_preferences" 
+            xalign 0.1
+            ypos 970
+            action [SetVariable("din_main_menu_var", True), Hide("din_extra"), ShowMenu("din_main_menu")]
+
+screen din_characters():
+    modal True
+
+    if not din_main_menu_var:
+        add "din_main_menu_options_frame" xalign 0.5 yalign 0.5
+
+        text "Персонажи":
+            font din_main_menu_font
+            size 70
+            xalign 0.5
+            ypos 33
+            antialias True
+            kerning 2
+
+        for char, info in din_characters_info.items():
+            imagebutton:
+                auto 'din_' + char + '_button_info' + '_%s'
+                xalign info['button_pos']
+                yalign 0.5
+                action [Hide('din_characters'), SetField(persistent, 'sprite_time', info['sprite_time']), ShowMenu('din_character_info', char=char)]
+
+        textbutton "Назад":
+            style "din_log_button"
+            text_style "din_settings_link_main_menu_preferences"
+            xalign 0.1
+            ypos 970
+            action [Hide('din_characters'), ShowMenu('din_extra')]
+
+screen din_character_info(char):
+    modal True
+
+    add din_characters_info[char]['bg']
+
+    text din_characters_info[char]['name']:
+        font din_main_menu_font
+        size 70
+        xalign 0.5
+        ypos 33
+        antialias True
+        kerning 2
+
+    add 'din_char_description_frame' xpos 58 ypos 135
+
+    add din_characters_info[char]['main_sprite'] xalign 1.05
+
+    text din_characters_info[char]['description']:
+        font din_main_menu_font
+        line_spacing 10
+        size 55
+        xpos 77
+        ypos 172
+
+    imagebutton:
+        auto "din_back_%s"
+        xpos 1800
+        ypos 1000
+        action [Hide('din_character_info'), ShowMenu('din_characters')]
+
+screen din_music_room():
+    modal True
+
+    if not din_main_menu_var:
+        add "din_main_menu_options_frame" xalign 0.5 yalign 0.5
+
+        add 'din_music_room_frame'
+
+        frame:
+            background None
+
+            side "c r":
+                area (0.15, 0.22, 0.79, 0.73)
+
+                viewport:
+                    id "din_music_box"
+                    draggable True
+                    mousewheel True
+                    scrollbars None
+                    
+                    grid 1 len(din_music_box):
+                        for name, track in sorted(din_music_box.iteritems()):
+                            textbutton name:
+                                style "din_button_none"
+                                text_style "music_link"
+                                xalign 0.5
+                                action din_mr.Play(track)
+
+                vbar:
+                    value YScrollValue("din_music_box")
+                    bottom_bar 'din_main_menu_vbar_null'
+                    top_bar 'din_main_menu_vbar_full'
+                    thumb None
+                    xmaximum 52
+
+        text "Музыка":
+            font din_main_menu_font
+            size 70
+            xalign 0.5
+            ypos 33
+            antialias True
+            kerning 2
+
+        textbutton "Назад":
+            style "din_log_button" 
+            text_style "din_settings_link_main_menu_preferences" 
+            xalign 0.1
+            ypos 970
+            action [Hide('din_music_room'), ShowMenu('din_extra')]
+
+        on "replaced" action Play("music", din_god_is_an_astronaut_tempus_horizon)
+
+screen din_background_gallery():
+    modal True
+
+    if not din_main_menu_var:
+        add "din_main_menu_options_frame" xalign 0.5 yalign 0.5
+
+        $ din_gallery_table = din_gallery_bg_list
+
+        $ din_len_table = len(din_gallery_bg_list)
+
+        text "Галерея":
+            font din_main_menu_font
+            size 70
+            xalign 0.5
+            ypos 33
+            antialias True
+            kerning 2
+
+        textbutton "Назад":
+            style "din_log_button" 
+            text_style "din_settings_link_main_menu_preferences" 
+            xalign 0.1
+            ypos 970
+            action [Hide('din_background_gallery'), ShowMenu('din_extra')]
+
+        grid din_rows din_cols xpos 0.09 ypos 0.18:
+            $ din_bg_displayed = 0
+            $ din_next_page = din_page + 1
+
+            if din_next_page > int(din_len_table / din_cells):
+                $ din_next_page = 0
+
+            for n in range(din_len_table):
+                if n < (din_page + 1) * din_cells and n >= din_page * din_cells:
+                    $ _din_t = im.Crop("din/images/bg/" + din_gallery_table[n] + ".png", (0, 0, 1920, 1080))
+                            
+                    $ _din_img_scaled = im.Scale(_din_t, 320, 180)
+
+                    $ din_img = im.Composite((336, 196), (8, 8), im.Alpha(_din_img_scaled, 0.9), (0, 0), im.Image(din_gui_path + "/save_load/main_menu/thumbnail_idle.png"))
+                    $ din_imgh = im.Composite((336, 196), (8, 8), _din_img_scaled, (0, 0), im.Image(din_gui_path + "/save_load/main_menu/thumbnail_hover.png"))
+
+                    add din_g.make_button(din_gallery_table[n], get_image("gui/gallery/blank.png"), None, din_imgh, din_img, style="blank_button", bottom_margin=50, right_margin=50)
+
+                    $ din_bg_displayed += 1
+
+                    if n + 1 == din_len_table:
+                        $ din_next_page = 0
+
+            for j in range(0, din_cells - din_bg_displayed):
+                null
+
+        if din_page != 0:
+            imagebutton:
+                auto 'din_gallery_previous_%s'
+                yalign 0.5 
+                xalign 0.04 
+                action [SetVariable("din_page", din_page - 1), ShowMenu("din_background_gallery")]
+
+        if din_page != int(din_page_counter(din_len_table, din_cells)) - 1:
+            imagebutton: 
+                auto 'din_gallery_next_%s'
+                yalign 0.5 
+                xalign 0.96 
+                action [SetVariable("din_page", din_next_page), ShowMenu("din_background_gallery")]
 
 screen din_load_main_menu():
     modal True
@@ -149,7 +391,7 @@ screen din_load_main_menu():
             text_style "din_settings_link_main_menu_preferences" 
             xalign 0.9
             ypos 970
-            action FileDelete(selected_slot, confirm = False)
+            action FileDelete(selected_slot, confirm=False)
             
         grid 4 3:
             xpos 0.11

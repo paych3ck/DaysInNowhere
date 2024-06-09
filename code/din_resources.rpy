@@ -190,6 +190,31 @@ init python:
 
     din_reload_names()
 
+    if persistent.din_flags == None:
+        persistent.din_flags = {}
+
+    persistent.din_flags.setdefault('din_ikarus_story_completed', False)
+    persistent.din_flags.setdefault('din_winterlong_story_completed', False)
+    persistent.din_flags.setdefault('din_rolegame_story_completed', False)
+
+    def din_get_char_sprites(char):
+        sprite_names = []
+
+        for root, dirs, files in os.walk('game/din/images/sprites/' + char):
+            for sprite in files:
+                sprite_names.append(sprite[:-4])
+
+        return sprite_names
+
+    def din_page_counter(n, k):
+        l = float(n) / float(k)
+        
+        if l - int(l) > 0:
+            return int(l) + 1
+
+        else:
+            return l
+
     def din_frame_animation(image_name, frames_quantity, retention, loop, transition, start=1, **properties):
         anim_args = []
         
@@ -233,7 +258,7 @@ init python:
     def din_interlude_intro(interlude_name):
         global save_name
 
-        save_name = 'Интерлюдия.\nТретий и Ниточник.\n{}'.format(interlude_name)
+        save_name = 'Интерлюдия.\nНиточник и Третий.\n{}'.format(interlude_name)
         persistent.timeofday = 'day'
         persistent.sprite_time = 'day'
         renpy.music.play('sound/ambiences/ext_road_day.ogg', 'ambience', fadein=2)
@@ -243,12 +268,12 @@ init python:
         renpy.show('din_third normal', at_list=[Transform(xalign=0.9, yalign=0.5)])
         renpy.show('din_interlude_frame', at_list=[Transform(xalign=0.5, yalign=0.85)])
         renpy.show('text', what=Text('Интерлюдия', xalign=0.5, yalign=0.7, style=style.din_story_label), tag='lbl')
-        renpy.show('text', what=Text('Третий и Ниточник', xalign=0.5, yalign=0.775, style=style.din_story_description), tag='desc')
+        renpy.show('text', what=Text('Ниточник и Третий', xalign=0.5, yalign=0.775, style=style.din_story_description), tag='desc')
         renpy.show('text', what=Text(interlude_name, xalign=0.5, yalign=0.85, style=style.din_interlude_name), tag='interl_name')
         renpy.with_statement(Dissolve(1.5))
         renpy.pause(3.0, hard=True)
         renpy.music.stop('ambience', 2)
-            
+        
     def din_onload(type):
         global din_lock_quit
         global din_lock_quick_menu
@@ -266,12 +291,21 @@ init python:
 
     din_onload_curried = renpy.curry(din_onload)
 
-    def din_current_time(): #TODO: выпилить глобальные переменные
-        global din_hour
+    def din_current_time():
+        din_hours = {
+            'morning': [7, 8],
+            'day': [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+            'sunset': [20, 21],
+            'night': [22, 23, 24, 0, 1, 2, 3, 4, 5, 6]            
+        }
         
         din_time = time.strftime("%H:%M:%S", time.localtime())
         din_hour, din_min, din_sec = din_time.split(":")
         din_hour = int(din_hour)
+
+        for timeofday, hours in din_hours.items():
+            if din_hour in hours:
+                return timeofday
 
     def din_set_main_menu_cursor():
         config.mouse_displayable = MouseDisplayable(din_gui_path + "misc/din_cursor.png", 0, 0)
@@ -298,31 +332,58 @@ init:
     $ din_lock_quick_menu = False
 
     $ din_take_everything = False
-    #$ din_winterlong_story_bar = False
-
-    #TODO: перекинуть персистенты в словарь
-
-    if persistent.din_ikarus_story_completed == None:
-        $ persistent.din_ikarus_story_completed = False
-
-    if persistent.din_winterlong_story_completed == None:
-        $ persistent.din_winterlong_story_completed = False
-
-    if persistent.din_rolegame_story_completed == None:
-        $ persistent.din_rolegame_story_completed = False
 
     $ din_wiperight = CropMove(.5, "wiperight")
     $ din_wipeleft = CropMove(.5, "wipeleft")
 
     $ din_set_timeofday_cursor_var = False
 
-    $ din_night_hours = [22, 23, 24, 0, 1, 2, 3, 4, 5, 6]
-    $ din_sunset_hours = [20, 21]
-    $ din_morning_hours = [7, 8]
+    $ din_characters_info = {
+        'nit': {
+            'name': 'Ниточник',
+            'button_pos': 0.05,
+            'main_sprite': 'din_nit normal_r',
+            'sprite_time': 'day',
+            'bg': 'bg din_ext_camp_plain_sight_day',
+            'description': 'Сдержанный оптимизм и лидерские навыки\nсделали Ниточника уважаемым и желанным\nгостем в любой компании даже несмотря\nна не самую большую опасность в бою.\nКрасноречие и сдержанность позволяют\nему служить отличным мостом между и\nстарыми, и довольно "молодыми"\nПионерами, а большие амбиции не\nпозволят ему сидеть на месте. Он - один\nиз немногих старших Пионеров, кто может\nоткрыто верить во Внешний Мир и не быть\nосмеянным.',
+            'sprites': din_get_char_sprites('nit')
+        },
+
+        'hall': {
+            'name': 'Халл',
+            'button_pos': 0.35,
+            'main_sprite': 'din_hall pos2 normal',
+            'sprite_time': 'night',
+            'bg': 'bg din_ext_scene_night',
+            'description': 'Если для многих жизнь в лагере стала\nпыткой и мучением, Халл явное исключение\nиз правила. Только в критические моменты\nза его рассеянностью и спонтанностью\nможно разглядеть опасного долгожителя.\nЖажда знаний и экспериментов завоевала\nему устойчивое место среди\nисследователей лагеря. Хоть девять из\nдесяти его изобретений - нерабочая груда\nхлама, десятое часто может стать\nпредметом мысли всех в Общем Лагере\nна многие смены.',
+            'sprites': din_get_char_sprites('hall')
+        },
+
+        'third': {
+            'name': 'Третий',
+            'button_pos': 0.65,
+            'main_sprite': 'din_third normal',
+            'sprite_time': 'sunset',
+            'bg': 'bg din_int_dining_hall_sunset_crashed',
+            'description': 'Среди верхушки лагеря каждый так или\nиначе пытается прогнуть мир под себя,\nподстроить лагерь под свои идеалы. Тем\nудивительнее выглядит Третий, о котором\nмногие рядовые Пионеры могли только\nслышать. Взяв себе имя за место в\nТурнире, победив почти всех один на один,\nТретий всегда занимает роли второго\nплана в лагере. Хоть такое отсутствие\nамбиций поначалу удивляло Пионеров, они\nбыстро смекнули, что Третий может стать \nбесценным подспорьем в любой идее.',
+            'sprites': din_get_char_sprites('third')
+        },
+
+        'gensek': {
+            'name': 'Генсек',
+            'button_pos': 0.95,
+            'main_sprite': 'din_gensek stay normal',
+            'sprite_time': 'night',
+            'bg': 'bg din_ext_bar_night',
+            'description': 'Очень деятельный и крайне опасный, этот\nПионер мало похож на других из первой\nдесятки. Если остальные скорее молча\nуживаются с лагерем, то Генсек\nперестраивает жизнь в лагере под себя.\nИменно он когда-то давно превратил\nскромное сборище пары Пионеров в\nсердце лагерей, Общую столовую.\nГенсек намеревается построить удобное\nдля него общество и, благодаря таланту к\nманипуляции и умению заводить друзей, он\nтак или иначе добьется своего.',
+            'sprites': din_get_char_sprites('gensek')
+        }
+    }
 
     image din_main_menu_frame = DinBlackRectangle(width=720, height=1080, alpha=0.6)
-    image din_main_menu_options_frame = DinBlackRectangle(width=1804, height=1028, alpha=0.7)
+    image din_main_menu_options_frame = DinBlackRectangle(width=1804, height=1028, alpha=0.6)
     image din_intro_frame = DinBlackRectangle(width=1920, height=689, alpha=0.6)
+    image din_char_description_frame = DinBlackRectangle(width=1150, height=915, alpha=0.6)
 
     image din_story_frame = DinBlackRectangle(width=630, height=240, alpha=0.5)
     image din_interlude_frame = DinBlackRectangle(width=630, height=290, alpha=0.5)

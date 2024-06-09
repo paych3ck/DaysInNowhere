@@ -12,20 +12,8 @@ label din_start:
     $ din_screens_save_act()
     $ din_set_main_menu_cursor()
     scene bg black with Dissolve(2)
-    $ din_current_time()
-
-    if din_hour in din_night_hours:
-        scene din_ext_camp_entrance_night
-        
-    elif din_hour in din_sunset_hours:
-        scene din_ext_camp_entrance_sunset
-        
-    elif din_hour in din_morning_hours:
-        scene din_ext_camp_entrance_morning
-        
-    else:
-        scene din_ext_camp_entrance_day
-
+    $ renpy.scene()
+    $ renpy.show('din_ext_camp_entrance_' + din_current_time())
     show din_intro_frame at truecenter
     show din_intro_logo at truecenter
     show din_blank_skip
