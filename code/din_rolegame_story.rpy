@@ -14,12 +14,12 @@ label din_rolegame_story:
     $ persistent.sprite_time = "day"   
     scene bg din_int_rpg_dungeon with Dissolve(2)
     $ din_onload("unlock")
-	
+    
     play music din_pillars_of_eternity_elmshore fadein 2
     play ambience ambience_catacombs fadein 2
-	
+    
     $ renpy.pause(.5, hard = True)
-    din_nit "{i}Вы заходите в подвал. {w}Вокруг довольно темно и кружит пыль, но вам...{/i} {w}Бросай на внимательность, Чайник."	  
+    din_nit "{i}Вы заходите в подвал. {w}Вокруг довольно темно и кружит пыль, но вам...{/i} {w}Бросай на внимательность, Чайник."     
 
     $ original_volume = renpy.music.get_volume()
     $ renpy.music.set_volume(original_volume * dining_hall_music_multiplier, delay=2, channel='music')
@@ -49,9 +49,9 @@ label din_rolegame_story:
     din_third "Только не говори мне, что будешь сейчас прописывать сюжет атаки двери."
     din_nit "Нет-нет, я же не в первый раз веду. У меня на этот случай где-то здесь лежала заготовка. Да, забыл."
     stop ambience fadeout 2
-	
-	$ renpy.music.set_volume(original_volume, delay=volume_change_delay, channel='music')
-	
+    
+    $ renpy.music.set_volume(original_volume, delay=volume_change_delay, channel='music')
+    
     scene bg din_int_rpg_dungeon with din_wipeleft
     $ renpy.block_rollback()
     $ persistent.timeofday = "dungeon"
@@ -179,7 +179,7 @@ label din_rg_search_2:
         jump din_rg_1_take_clock
         
     if din_choice_wait = True:
-        jump din_rg_wait    
+        jump din_rg_wait
 
 label din_rg_1_torch_poition:       
     ##Если Факел, то:
@@ -616,7 +616,7 @@ label din_rg_final:
     din_narrator "Девушки смотрели то на меня, то на Ниточника, но в диалог не встрявали."
     din_th "Нет, словами будет долго."
     ##запускай dn_experia_smoke_and_ashes fadein 5
-	## звук удара кулаком, а через секунду падения тела
+    ## звук удара кулаком, а через секунду падения тела
     din_narrator "Чтобы не тратить время, я поднял сидящего рядом Чайника за рубашку, быстро провел удар в солнечное сплетение и бросил его в сторону дороги."
     din_narrator "Тот сделал пару оборотов и так и застыл лицом в землю."
     din_narrator "На лицах девушек образовалось смятение, на лице же Ниточника - удивление на пару с решительностью. Он даже успел за время моей демонстрации быстро встать на ноги и занять оборонительную позицию."
@@ -630,10 +630,10 @@ label din_rg_final:
     din_narrator "Чайник никогда не умел сдерживаться."
     din_narrator "Мы с Ниточником молчаливо переглянулись, решая между собой, что будет дальше."
     din_th "Похоже, тут уже нечего делать."
-	
-	##звук пинка по телу. Вроде в оригинале такой был, когда Семён куда-то спрыгивал.
-	 stop music fadeout 2
-	
+    
+    ##звук пинка по телу. Вроде в оригинале такой был, когда Семён куда-то спрыгивал.
+    stop music fadeout 2
+    
     din_narrator "Я закатил глаза и подошел пнуть неуёмное тело."
     din_teapot "ОЙ, Третий, я не могу! Ты всегда пытаешься своих опонентов пафосом передавить? Пха-ха-ах!"
     din_narrator "Чайник катался по земле и хлопал себя руками, как задыхающийся тюлень."
@@ -786,7 +786,7 @@ label din_rolegame_story_interlude:
     din_narrator "Небо поменялось от одной моей осознанной мысли. {w}Голова готова была закружиться от всего, что можно сделать с этим всеми забытым клочком реальности."
     din_narrator "Мир вокруг откликался на мои команды, как податливая глина."
     din_nit_he "Этот сон из тех, что никогда не закончатся."
-	din_nit_he "Наконец-то мы сможем воплотить мою мечту в реальность. {w}Надеюсь, лагерь это выдержит."
+    din_nit_he "Наконец-то мы сможем воплотить мою мечту в реальность."# {w}Надеюсь, лагерь это выдержит."
     din_narrator "Но перед этим не расскажешь мне пару историй? {w}Только..."
     ##вспышка, фон сменяется на пустую и тихую общую дневную столовую
     din_nit_he "...Добавив красок?"

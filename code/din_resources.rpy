@@ -196,6 +196,10 @@ init python:
     persistent.din_flags.setdefault('din_ikarus_story_completed', False)
     persistent.din_flags.setdefault('din_winterlong_story_completed', False)
     persistent.din_flags.setdefault('din_rolegame_story_completed', False)
+    persistent.din_flags.setdefault('din_nit_info_received', False)
+    persistent.din_flags.setdefault('din_hall_info_received', False)
+    persistent.din_flags.setdefault('din_third_info_received', False)
+    persistent.din_flags.setdefault('din_gensek_info_received', False)
 
     def din_get_char_sprites(char):
         sprite_names = []
@@ -384,6 +388,10 @@ init:
     image din_main_menu_options_frame = DinBlackRectangle(width=1804, height=1028, alpha=0.6)
     image din_intro_frame = DinBlackRectangle(width=1920, height=689, alpha=0.6)
     image din_char_description_frame = DinBlackRectangle(width=1150, height=915, alpha=0.6)
+    image din_hall_char_name_frame = DinBlackRectangle(width=180, height=70, alpha=0.6)
+    image din_gensek_char_name_frame = DinBlackRectangle(width=250, height=70, alpha=0.6)
+    image din_nit_char_name_frame = DinBlackRectangle(width=330, height=70, alpha=0.6)
+    image din_third_char_name_frame = DinBlackRectangle(width=240, height=90, alpha=0.6)
 
     image din_story_frame = DinBlackRectangle(width=630, height=240, alpha=0.5)
     image din_interlude_frame = DinBlackRectangle(width=630, height=290, alpha=0.5)
@@ -405,7 +413,7 @@ init:
             linear 0.5 zoom 1.0
 
         on hover:
-            linear 0.5 zoom 1.02
+            linear 0.5 zoom 1.025
 
     transform din_buttons_transition():
         on hover:
