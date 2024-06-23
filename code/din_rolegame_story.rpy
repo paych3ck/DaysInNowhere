@@ -1,33 +1,20 @@
 label din_rolegame_story:
-
-    $ dining_hall_music_multiplier = 0.5
-
-    $ volume_change_delay = 2.0
-
     $ renpy.block_rollback()
     $ din_set_mode_adv()
     stop music fadeout 3
     $ renpy.pause(2, hard=True)
     $ din_story_intro('Игра по ролям\nДень Третьего', 'day', 'bg int_dining_hall_day', 'din_third normal', 'Игра по ролям', 'День Третьего', 'dining_hall_empty')
-    scene bg black with Dissolve(2)
     $ persistent.timeofday = "dungeon"
-    $ persistent.sprite_time = "day"   
+    $ persistent.sprite_time = 'day'
     scene bg din_int_rpg_dungeon with Dissolve(2)
     $ din_onload("unlock")
-    
     play music din_pillars_of_eternity_elmshore fadein 2
     play ambience ambience_catacombs fadein 2
-    
-    $ renpy.pause(.5, hard = True)
-    din_nit "{i}Вы заходите в подвал. {w}Вокруг довольно темно и кружит пыль, но вам...{/i} {w}Бросай на внимательность, Чайник."     
-
-    $ original_volume = renpy.music.get_volume()
-    $ renpy.music.set_volume(original_volume * dining_hall_music_multiplier, delay=2, channel='music')
-
-    $ din_timing_memorization_m("pause", 1)
-    $ din_timing_memorization_a("pause", 1)
+    din_nit "{i}Вы заходите в подвал. {w}Вокруг довольно темно и кружит пыль, но вам...{/i} {w}Бросай на внимательность, Чайник."
+    $ din_rolegame_ambience_memorization.pause()
+    $ din_rolegame_music_memorization.pause()
     scene bg int_dining_hall_day
-    show osd_hall pos2 smile3_burns at left
+    show osd_hall pos2 smile3 at left
     show osd_nit normal_l at right
     with din_wiperight
     play ambience din_voices fadein 2
@@ -48,15 +35,12 @@ label din_rolegame_story:
     din_nit "Ну как знает. Пока я готовлю его ход, ходи ты, Третий."
     din_third "Только не говори мне, что будешь сейчас прописывать сюжет атаки двери."
     din_nit "Нет-нет, я же не в первый раз веду. У меня на этот случай где-то здесь лежала заготовка. Да, забыл."
-    stop ambience fadeout 2
-    
-    $ renpy.music.set_volume(original_volume, delay=volume_change_delay, channel='music')
-    
+    stop ambience fadeout 2    
     scene bg din_int_rpg_dungeon with din_wipeleft
     $ renpy.block_rollback()
     $ persistent.timeofday = "dungeon"
-    $ din_timing_memorization_m("continue", 1)
-    $ din_timing_memorization_a("continue", 1)
+    $ din_rolegame_ambience_memorization.resume()
+    $ din_rolegame_music_memorization.resume()
     din_nit "{i}Ты входишь в затхлый подвал следом за своим компаньоном. В целом видишь всё то же самое, с одним отличием."
     din_nit "{i}В конце помещения стоит рослый детина в кожаном доспехе и ятаганом «атакует» дверь.{/i} {w}Что бы он ни имел под этим в виду."
     din_nit "Устроишь что-то или будешь собирать местную пыль?"
@@ -132,7 +116,7 @@ label din_rg_search_2:
         din_nit "Твой черёд, Третий. {w}Начинай." 
     
     ##Тут, если выбрано всё, то меню пропускается и автоматически запускается вариант ждать. Иначе - меню из двух выборов
-    if din_take_everything :
+    if din_take_everything:
         jump din_rg_wait_label
     
     menu:
@@ -642,12 +626,17 @@ label din_rg_final:
     din_narrator "Девушки, открыв рты, наблюдали за нашими разборками."
     din_narrator "Их внимание начало меня напрягать, поэтому по моему щелчку пальцев мы перенеслись в другой лагерь."
     din_th "Черт, теперь весь спектакль заново разыгрывать."
-    $ renpy.pause(5, hard=True)
+    stop music fadeout 4
+    stop ambience fadeout 4
+    stop sound_loop fadeout 4
+    scene bg black with Dissolve(2)
+    $ renpy.pause(2, hard=True)
 
 label din_rolegame_story_interlude:
     $ renpy.block_rollback()
-    $ persistent.timeofday = "day"
-    scene bg ext_road_day with dissolve
+    $ din_interlude_intro('Осознание')
+    scene bg ext_road_sunset with Dissolve(2)
+    play ambience ambience_ext_road_evening fadein 2
     play music din_out_of_sight_reasons fadein 5
     din_narrator "Странные он говорил вещи."
     din_narrator "Во сне можно было создавать всё, что хочешь, двигаться, как хочешь. Абсолютно всё, что угодно."
@@ -791,3 +780,11 @@ label din_rolegame_story_interlude:
     ##вспышка, фон сменяется на пустую и тихую общую дневную столовую
     din_nit_he "...Добавив красок?"
     ##Конец, Титры, всё вот это
+    stop music fadeout 2
+    stop ambience fadeout 2
+    scene bg black with Dissolve(2)
+    $ persistent.din_flags['din_rolegame_story_completed'] = True
+    $ persistent.din_flags['din_third_info_received'] = True
+    $ persistent.din_flags['din_nit_info_received'] = True
+    $ renpy.pause(2, hard=True)
+    $ MainMenu(confirm=False)()

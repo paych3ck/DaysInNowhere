@@ -4,7 +4,6 @@ label din_winterlong_story:
     stop music fadeout 3
     $ renpy.pause(2, hard=True)
     $ din_story_intro('Длиною в зиму\nДень Третьего', 'night', 'bg din_fireplace_winterlong_anim', 'din_third smile', 'Длиною в зиму', 'День Третьего', 'forest_night')
-    scene bg black with Dissolve(1.5)
     $ persistent.sprite_time = "sunset"
     $ persistent.timeofday = "sunset"
     $ renpy.pause(2, hard=True)
@@ -22,7 +21,7 @@ label din_winterlong_story:
     $ renpy.pause(1, hard=True)
     play sound sfx_open_door_kick
     play music din_dance_with_the_dead_eyes_of_madness fadein 2
-    show din_hall pos1 devil_smile_burns far at center with dissolve
+    show din_hall pos1 devil_smile far at center with dissolve
     din_narrator "От решения меня отвлек новый гость, рывком открывший дверь. Кроме двух ножей в руках - ничего примечательного."
     din_pi_teapot "Девочки и мальчики, берегите ваши руки, ноги, пальчики! {w}А еще лучше - просто испаритесь на счет три."
     din_narrator "Куклы застыли в недоумении, а вот местный Пионер быстро начал собираться в окно. {w}Смышлёный парень. Знает, что с незнакомцами, у которых есть нож, лучше не разговаривать."
@@ -48,12 +47,12 @@ label din_winterlong_story:
     din_narrator "Скоро остались только я, гость и мой остывший ужин."
     din_narrator "У меня не было моральных сил убегать куда-то. Кажется, остается только один выход."
     din_narrator "Ненавижу насилие."
-    show din_hall pos2 normal_burns at center with dissolve
+    show din_hall pos2 normal at center with dissolve
     din_narrator "Гость, похоже, собирался уходить, но заметил, что какая-то дефектная кукла еще сидит в столовой. {w}Аккуратно разглядывая, он взял нож лезвием вперед и медленно пошел ко мне."
     din_th "Бросить в него стул или побежать по столам? {w}Можно еще осколок стекла раздобыть..."
     stop music fadeout 3
     din_narrator "Между нами осталось с десяток метров. Я приготовился к броску."
-    show din_hall pos2 smile_burns with dspr
+    show din_hall pos2 smile with dspr
     din_pi_teapot "Волгу мне в столовую, Третий! {w}Ты!"
     din_third "Аааа, Чайник... {w}Привет."
     din_narrator "Я сел обратно за свой трапезный стол."
@@ -69,27 +68,28 @@ label din_winterlong_story:
     din_teapot "Что {b}Я{/b} задумал? Под насколько большим камнем ты жил, Третий? В конце этой смены Неделя Зимы! И раз ты уже здесь и ничем не занят, то мне понадобится твоя грубая сила."
     din_th "Ах да, эта чушь..."
     din_third "Не сочти за грубость, но плевать я хотел на этот праздник и на вашу Зиму."
-    show din_hall pos2 sad_burns with dspr
+    show din_hall pos2 sad with dspr
     din_teapot "Да не будь ты старым нудным пнём, Третий. Тебе там тоже найдется чем заняться. Тем более праздник для всех."
     din_teapot "Даже Ниточник будет."
     din_third "Он что, согласился помочь с организацией?"
-    show din_hall pos2 smile_burns with dspr
+    show din_hall pos2 smile with dspr
     din_teapot "Пха-ха-ха! Нет конечно, он же не дурачок какой-нибудь."
     din_third "Мне нужно напоминать, что ты-то на это подписался?"
     din_teapot "Ну, мне не жалко. {w}Я огнеупорный."
-    show din_hall pos2 smile2_burns with dspr
+    show din_hall pos2 smile2 with dspr
     din_narrator "Чайник счастливо улыбнулся."
     din_third "Точно сказано."
-    show din_hall pos2 sad_burns with dspr
+    show din_hall pos2 sad with dspr
     din_narrator "Он посмотрел на меня пристально и укоризненно."
     din_third "Хорошо-хорошо. Ты огнеупорный."
     din_narrator "Я начал глазами искать что-то воспламенимое в этой столовой."
     stop ambience fadeout 2
     scene bg black with Dissolve(2)
+    $ renpy.pause(1, hard=True)
     $ renpy.block_rollback()
     $ persistent.timeofday = "night"
     $ persistent.sprite_time = "night"
-    scene bg din_fireplace_winterlong_anim with dissolve
+    scene bg din_fireplace_winterlong_anim with Dissolve(2)
     play sound_loop din_voices fadein 2
     play ambience sfx_forest_fireplace fadein 2
     play music din_god_is_an_astronaut_first_day_of_sun fadein 5
@@ -138,7 +138,9 @@ label din_winterlong_story_bar:
     din_th "С другой стороны, сколько выпивка вызывает истерик, столько и останавливает."# В конце концов, на общее число она не влияет."
     din_th "Да и не в моих это привычках - решать за других."
     stop ambience fadeout 2
-    scene bg din_ext_bar_night with dissolve
+    scene bg din_ext_bar_night 
+    show din_nuts silhouette normal at center
+    with dissolve
     play ambience ambience_forest_night fadein 2
     play music din_el_huervo_daisuke fadein 2
     din_narrator "Заправлявший баром Пионер молча налил мне стакан."
@@ -147,6 +149,7 @@ label din_winterlong_story_bar:
     din_narrator "Бармен же не делал никаких лишних движений."
     din_th "Вряд ли этим бы занимался кто-то кроме любителя посмотреть на чужую печаль."
     din_th "Или... {w}Я ошибаюсь? {w}Буду надеяться, что осталось хоть что-то, в чём я могу ошибаться."
+    hide din_nuts silhouette normal with dissolve
     din_narrator "Забрав стакан, я отсел за стол к одинокому Пионеру, безвольно допивавшему очередную бутылку."
     din_narrator "Вот эту-то личность я хорошо знал."
     din_narrator "Огонёк когда-то был невероятным. Он излучал счастье и радость, чуть ли не единственный."
@@ -221,6 +224,7 @@ label din_winterlong_story_bar:
     stop ambience fadeout 4
     stop sound_loop fadeout 4
     scene bg black with Dissolve(2)
+    $ persistent.din_flags['din_gensek_info_received'] = True
     $ renpy.pause(2, hard=True)
     jump din_winterlong_story_interlude
     
@@ -232,10 +236,10 @@ label din_winterlong_story_science:
     ##Другая музыка
     din_narrator "Вопреки моим ожиданиям, пылких споров там не происходило. Все сдержанно слушали мысли стоящего на платформе."
     din_narrator "Я тихо встал сбоку, чтобы не привлекать внимание."
-    show din_hall pos2 smile2_burns far at center with dissolve
+    show din_hall pos2 smile2 far at center with dissolve
     din_narrator "Вещал, что не удивительно, Чайник."
     din_teapot "...да, как вы и могли догадаться, вопрос в источнике энергии."
-    din_teapot" Не важно, дрейфуем мы в абсолютном вакууме или находимся на экспериментальном полигоне, в любом случае нужно невообразимое колличество энергии, чтобы обеспечить во всех параллелях тепло."
+    din_teapot "Не важно, дрейфуем мы в абсолютном вакууме или находимся на экспериментальном полигоне, в любом случае нужно невообразимое колличество энергии, чтобы обеспечить во всех параллелях тепло."
     din_narrator "За столько времени я так привык к глупостям Чайника, что перестал воспринимать его как, без преувеличения, оплот рационализма и науки во всеобщих глазах."
     din_teapot "Рассмотрим несколько моих версий. Когда я закончу, пожалуйста, озвучьте свои."
     din_teapot "Итак, первый вариант - события берут место в чьём-то из наших воображений."
@@ -244,7 +248,7 @@ label din_winterlong_story_science:
     din_teapot "Таких источников может быть около десятка, плюс местное Солнце."
     din_teapot "Оно вряд ли находится дальше пяти километров над землей, из чего можно сделать приблизительные рассчеты."
     din_pi_generic "Пять километров - длина дороги?"
-    din_teapot "Да, почти. Это половина длинны. Я всё еще надеюсь, что каждая параллель ограничена сферой. {w}Если создавшие эти мирки могли менять пространство, но не знали о банальном удобстве сферических структур... {w} То у нас проблемы."
+    din_teapot "Да, почти. Это половина длины. Я всё еще надеюсь, что каждая параллель ограничена сферой. {w}Если создавшие эти мирки могли менять пространство, но не знали о банальном удобстве сферических структур... {w} То у нас проблемы."
     din_teapot "Рассчеты я, разумеется, уже провёл. {w}В очень сухой теории источниками могут служить крохотные ядерные синтезы. {w}Молекулярные, можно сказать."
     din_teapot "В теории, потому что я их не нашел. {w}Но их нужно как-то запускать и координировать. Возможно, какими-то волнами."
     din_teapot "Поэтому попрошу вас в течение следующих двух недель проследить за поведением радио и самоделок в разных участках ваших лагерей. "
@@ -253,7 +257,7 @@ label din_winterlong_story_science:
     din_teapot "Эту теорию у меня пока не было желания рассмотреть, поговорим о ней после результатов. {w}На этом всё, спасибо."
     hide din_hall with dissolve
     din_narrator "Он в тишине сошел с трибуны. Поискав свободное место, заметил меня."
-    show din_hall pos2 smile_burns at center with dissolve
+    show din_hall pos2 smile at center with dissolve
     din_teapot "О, какая компания! Ты вовремя. {w}Сыграем в города? {w}Райцентр!"
     din_third "Райцентр."
     din_teapot "..."
@@ -399,16 +403,19 @@ label din_winterlong_story_science:
     din_narrator "Я устало вдохнул воздух."
     din_th "..это всё позже, не сейчас."
     din_th "Сейчас просто отдохну. И пусть мне не приснится ни один сон."
+    stop music fadeout 4
+    stop ambience fadeout 4
+    stop sound_loop fadeout 4
+    scene bg black with Dissolve(2)
+    $ persistent.din_flags['din_hall_info_received'] = True
+    $ renpy.pause(2, hard=True)
     jump din_winterlong_story_interlude
     
 label din_winterlong_story_interlude:
     $ renpy.block_rollback()
-    $ persistent.timeofday = "day"
     $ din_interlude_intro('Пробуждение')
-    scene bg black with Dissolve(1.5)
-    $ renpy.pause(2, hard=True)
-    scene bg din_ext_camp_plain_sight_day with Dissolve(2)
-    play ambience ambience_ext_road_day fadein 2
+    scene bg din_ext_camp_plain_sight_sunset with Dissolve(2)
+    play ambience ambience_ext_road_evening fadein 2
     play music din_if_these_trees_could_talk_barren_lands_of_the_modern_dinosaur fadein 5
     din_th "Это место выводит из привычного равновесия."
     din_th "Я испытываю определённую... {w}Злость? {w}Или это безразличие? {w}Бессилие?"
@@ -427,7 +434,7 @@ label din_winterlong_story_interlude:
     din_th "Что не говори, но, похоже, даже для нас вечность может быть неприятной."
     din_narrator "Я отошел от спящего тела."#, на время оставить эти идеи."
     din_narrator "Трава сгибалась под моими ногами."
-    din_th "Как ни странно, но больше всего я боялся вытоптать крохотный участок растительности в этой зеленой пустоши."
+    din_th "Как ни странно, но больше всего я боялся вытоптать крохотный участок растительности в этой пустоши."
     din_th "Тогда бы образовалась крохотная несовершенность на необьятном полотне, которая мозолила бы мне глаза своим существованием всю вечность."
     din_th "Мог бы отвернуться, но не забыть её."
     din_th "Вторым выходом было вытоптать всю траву в этой утопии."
@@ -443,7 +450,7 @@ label din_winterlong_story_interlude:
     din_th "Если меня не существует, то и не нужно о чем-то беспокоиться, думать о будущем, планировать наперёд..."
     din_narrator "Любопытно, если меня, или того, что я собой считаю, нет, то что тогда есть?"
     din_narrator "Что задаёт вопросы? Что сейчас прогоняет эти мысли в своей голове?"
-    $ din_unblink("bg din_ext_camp_plain_sight_day", 2)
+    $ din_unblink("bg din_ext_camp_plain_sight_sunset", 2)
     din_narrator "Это красивое место. {w}Красивое, но пустое."
     din_narrator "Параллели..."
     din_narrator "Ладно, хватит бездельничать."
@@ -451,5 +458,6 @@ label din_winterlong_story_interlude:
     stop music fadeout 2
     stop ambience fadeout 2
     scene bg black with Dissolve(2)
-    #jump din_rolegame_story
-    $ MainMenu(confirm=False)()
+    $ persistent.din_flags['din_winterlong_story_completed'] = True
+    $ renpy.pause(2, hard=True)
+    jump din_rolegame_story

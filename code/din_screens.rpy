@@ -67,12 +67,19 @@ screen din_main_menu():
 
         add "din_main_menu_underline" xalign 0.5 ypos 191
 
-        textbutton 'Выбрать историю' at din_buttons_atl():
+        $ din_start_button_text = 'Выбрать историю' if persistent.din_flags['din_intro_completed'] else 'Начать игру'
+
+        textbutton '[din_start_button_text]' at din_buttons_atl():
             style "din_main_menu_style"
             text_style "din_main_menu_style"
             xalign 0.5
             ypos 300
-            action [Hide("din_main_menu"), ShowMenu('din_story_choice', _transition=fade)]
+
+            if persistent.din_flags['din_intro_completed']:
+                action [Hide("din_main_menu"), ShowMenu('din_story_choice', _transition=fade)]
+
+            else:
+                action [Hide('din_main_menu', Dissolve(1.5)), Start('din_intro')]
 
         textbutton 'Загрузить' at din_buttons_atl():
             style "din_main_menu_style"

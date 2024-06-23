@@ -85,6 +85,20 @@ init python:
     din_names["din_un"] = "Лена"
     store.din_names_list.append("din_un")
 
+    class DinTimingMemorization():
+        def __init__(self, channel, fade):
+            self.channel = channel
+            self.fade = fade            
+
+        def pause(self):
+            self.file_name = renpy.music.get_playing(self.channel)
+            self.pause_time = renpy.music.get_pos(self.channel)
+            renpy.music.stop(self.channel, fadeout=self.fade)
+
+        def resume(self):
+            self.resume_params = '<from 0>' + self.file_name if self.pause_time == None else '<from {}>'.format(self.pause_time) + self.file_name
+            renpy.music.play(self.resume_params, channel=self.channel, fadein=self.fade)
+
     class DinBlackRectangle(renpy.Displayable):
         def __init__(self, width, height, alpha, **kwargs):
             super(DinBlackRectangle, self).__init__(**kwargs)
@@ -193,6 +207,7 @@ init python:
     if persistent.din_flags == None:
         persistent.din_flags = {}
 
+    persistent.din_flags.setdefault('din_intro_completed', False)
     persistent.din_flags.setdefault('din_ikarus_story_completed', False)
     persistent.din_flags.setdefault('din_winterlong_story_completed', False)
     persistent.din_flags.setdefault('din_rolegame_story_completed', False)
@@ -258,16 +273,19 @@ init python:
         renpy.with_statement(Dissolve(1.5))
         renpy.pause(3.0, hard=True)
         renpy.music.stop('ambience', 2)
+        renpy.scene()
+        renpy.show('bg black')
+        renpy.with_statement(Dissolve(1.5))
 
     def din_interlude_intro(interlude_name):
         global save_name
 
         save_name = 'Интерлюдия.\nНиточник и Третий.\n{}'.format(interlude_name)
-        persistent.timeofday = 'day'
-        persistent.sprite_time = 'day'
-        renpy.music.play('sound/ambiences/ext_road_day.ogg', 'ambience', fadein=2)
+        persistent.timeofday = 'sunset'
+        persistent.sprite_time = 'sunset'
+        renpy.music.play('sound/ambiences/ext_road_evening.ogg', 'ambience', fadein=2)
         renpy.scene()
-        renpy.show('bg din_ext_camp_plain_sight_day')
+        renpy.show('bg din_ext_camp_plain_sight_sunset')
         renpy.show('din_nit normal_r', at_list=[Transform(xalign=0.1, yalign=0.5)])
         renpy.show('din_third normal', at_list=[Transform(xalign=0.9, yalign=0.5)])
         renpy.show('din_interlude_frame', at_list=[Transform(xalign=0.5, yalign=0.85)])
@@ -277,6 +295,9 @@ init python:
         renpy.with_statement(Dissolve(1.5))
         renpy.pause(3.0, hard=True)
         renpy.music.stop('ambience', 2)
+        renpy.scene()
+        renpy.show('bg black')
+        renpy.with_statement(Dissolve(1.5))
         
     def din_onload(type):
         global din_lock_quit
@@ -342,6 +363,9 @@ init:
 
     $ din_set_timeofday_cursor_var = False
 
+    $ din_rolegame_ambience_memorization = DinTimingMemorization('ambience', 2)
+    $ din_rolegame_music_memorization = DinTimingMemorization('music', 2)
+
     $ din_characters_info = {
         'nit': {
             'name': 'Ниточник',
@@ -405,6 +429,7 @@ init:
     image din_main_menu_morning_anim = din_frame_animation("din/images/gui/main_menu/morning/din_morning", 5, 4, True, Dissolve(2))
 
     image din_gensek silhouette normal = im.MatrixColor("din/images/sprites/gensek/normal/din_gensek stay normal.png", im.matrix.tint(0, 0, 0))
+    image din_nuts silhouette normal = im.MatrixColor("din/images/sprites/nuts/normal/din_nuts normal.png", im.matrix.tint(0, 0, 0))
 
     image din_blank_skip = renpy.display.behavior.ImageButton(Null(1920, 1080), Null(1920, 1080), clicked=[Jump('din_after_intro')])
 
