@@ -257,6 +257,20 @@ init python:
         renpy.show("unblink")
         renpy.pause(unblink_pause, hard=True)
 
+    def din_portal_using(after_portal_use_bg):
+        before_portal_use_bg = renpy.get_attributes('bg')[0]
+        renpy.play(din_portal_use, channel="sound")
+        renpy.scene()
+        renpy.show(before_portal_use_bg, at_list=[din_portal_using_zoom])
+        renpy.pause(0.035, hard=True)
+        renpy.scene()
+        renpy.show("bg white")
+        renpy.transition(din_portal_use_transition)
+        renpy.pause(1.2, hard=True)
+        renpy.show(after_portal_use_bg)
+        renpy.transition(flash)
+        renpy.pause(1.3, hard=True)
+
     def din_story_intro(_save_name, daytime, background, sprite, lbl, desc, amb):
         global save_name
 
@@ -366,6 +380,8 @@ init:
     $ din_rolegame_ambience_memorization = DinTimingMemorization('ambience', 2)
     $ din_rolegame_music_memorization = DinTimingMemorization('music', 2)
 
+    $ din_portal_use_transition = ImageDissolve("din/images/gui/misc/din_transition2.png", 0.3, 16)
+
     $ din_characters_info = {
         'nit': {
             'name': 'Ниточник',
@@ -430,6 +446,7 @@ init:
 
     image din_gensek silhouette normal = im.MatrixColor("din/images/sprites/gensek/normal/din_gensek stay normal.png", im.matrix.tint(0, 0, 0))
     image din_nuts silhouette normal = im.MatrixColor("din/images/sprites/nuts/normal/din_nuts normal.png", im.matrix.tint(0, 0, 0))
+    image din_pi silhouette normal = im.MatrixColor("din/images/sprites/pi/normal/din_pi normal.png", im.matrix.tint(0, 0, 0))
 
     image din_blank_skip = renpy.display.behavior.ImageButton(Null(1920, 1080), Null(1920, 1080), clicked=[Jump('din_after_intro')])
 
@@ -448,6 +465,10 @@ init:
         on idle:
             alpha 0.0
             linear 0.5 alpha 1.0
+
+    transform din_portal_using_zoom():
+        xalign 0.5 yalign 0.5 zoom 1.0
+        linear 0.5 zoom 2 xalign 0.5 yalign 0.5
 
     transform din_zoom_in_center():
         xalign 0.5 yalign 0.5 zoom 1.0

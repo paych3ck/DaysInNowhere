@@ -1,6 +1,8 @@
 label din_intro:
+    $ renpy.block_rollback()
     $ din_set_mode_adv()
     stop music fadeout 3
+    $ din_set_timeofday_cursor_var = True
     $ renpy.pause(2, hard=True)
     $ persistent.sprite_time = "sunset"  
     $ persistent.timeofday = "sunset"

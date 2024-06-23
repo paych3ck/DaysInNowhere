@@ -3,6 +3,7 @@ label din_rolegame_story:
     $ din_set_mode_adv()
     stop music fadeout 3
     $ renpy.pause(2, hard=True)
+    $ din_set_timeofday_cursor_var = True
     $ din_story_intro('Игра по ролям\nДень Третьего', 'day', 'bg int_dining_hall_day', 'din_third normal', 'Игра по ролям', 'День Третьего', 'dining_hall_empty')
     $ persistent.timeofday = "dungeon"
     $ persistent.sprite_time = 'day'
@@ -13,13 +14,13 @@ label din_rolegame_story:
     din_nit "{i}Вы заходите в подвал. {w}Вокруг довольно темно и кружит пыль, но вам...{/i} {w}Бросай на внимательность, Чайник."
     $ din_rolegame_ambience_memorization.pause()
     $ din_rolegame_music_memorization.pause()
+    $ renpy.block_rollback()
+    $ persistent.timeofday = "day"
     scene bg int_dining_hall_day
     show osd_hall pos2 smile3 at left
     show osd_nit normal_l at right
     with din_wiperight
     play ambience din_voices fadein 2
-    $ renpy.block_rollback()
-    $ persistent.timeofday = "day"
     din_narrator "Пока Чайник бросал два игральных кубика, Ниточник аккуратно поправлял все свои листы с заготовками событий."
     din_narrator "В общей столовой было как обычно в обед. Все в большинстве своем сбивались в группки за столами, дабы что-то обсудить или чем-то заняться."
     din_narrator "Обед отличался от любого другого времени суток исключительно тем, что часть народу сидела на кухне, пытаясь приготовить что-то сьедобное."
@@ -272,7 +273,14 @@ label din_rg_1_torch_poition:
     din_nit "Получите по уровню."
     din_teapot "Что только что произошло?"
     stop music fadeout 2
-    scene bg int_dining_hall_day with dissolve
+    stop ambience fadeout 2
+    $ renpy.block_rollback()
+    $ persistent.timeofday = "day"
+    scene bg int_dining_hall_day
+    show osd_hall pos2 smile3 at left
+    show osd_nit normal_l at right
+    with din_wiperight
+    play ambience din_voices fadein 2
     din_nit "Древня-сущность-финальный-бос полезла в туман, который оказался для неё ядовитым и за два раунда получила шесть критических природным уроном."
     din_nit "Потом ваши персонажи накрылись от голода, потому что выхода из той темноты не появилось."
     din_nit "Мои поздравления."
@@ -514,7 +522,7 @@ label din_rg_final:
             din_th "Надеюсь, он это не серьёзно."
             
     ## герои идут в музклуб, так что здесь будет фон на дорогу в музклуб. Надо посмотреть по карте какой.
-    $ renpy.pause(3, hard = True)
+    $ renpy.pause(3, hard=True)
     din_nit "А тебе как, Чайник?"
     din_teapot "Честно? {w=0.5}Прямо вау!"
     din_teapot "Я думал, ты меня по лбу щелкнешь за съезд с твоих сюжетных рельс."
@@ -524,7 +532,7 @@ label din_rg_final:
     din_narrator "По дороге мы перешли в другой лагерь, чтобы не делать этого на месте." 
     ##фон музклуба снаружи. От этой части всё будет общим независимо от предыдущих выборов в этой истории. 
     play music din_sen_no_kiseki_IV_ost_shade_of_anxiety_ray_of_hope fadein 5
-    $ renpy.pause(3, hard = True)
+    $ renpy.pause(3, hard=True)
     din_narrator "Неожиданно, но у музклуба нас уже ждали."
     ##Появляются Лена Славя и Алиса. Конец звуков ходьбы
     din_narrator "Три девушки немного напряженно смотрели в нашу сторону."
@@ -637,7 +645,7 @@ label din_rolegame_story_interlude:
     $ din_interlude_intro('Осознание')
     scene bg ext_road_sunset with Dissolve(2)
     play ambience ambience_ext_road_evening fadein 2
-    play music din_out_of_sight_reasons fadein 5
+    play music din_out_of_sight_reasons fadein 3
     din_narrator "Странные он говорил вещи."
     din_narrator "Во сне можно было создавать всё, что хочешь, двигаться, как хочешь. Абсолютно всё, что угодно."
     din_narrator "И время во сне отсчитывается в приблизительно 2.48 раза медленнее. {w}Это если у меня когда-то будет не хватать времени."
@@ -667,7 +675,7 @@ label din_rolegame_story_interlude:
     din_narrator "В книгах не было классов чисел после дециллиона, но мне страх как не хочется считать время в «тысячах тысяч»."
     din_narrator "Пора бы придумать следующим классам названия, но фантазия никогда не входила в список моих сильных сторон."
     din_narrator "Впрочем, время у меня еще есть. Не так много, сравнительно, но всё же."
-    $ renpy.pause(3, hard = True)
+    $ renpy.pause(3, hard=True)
     din_narrator "Какое-то странное чувство вдруг проскользило в мыслях. И от того, что подобного чувства раньше не бывало, особенно неприятно."
     din_narrator "На секунду показалось, что земля под ногами сделала резкий прыжок вперёд."
     ##Если это не слишком муторно, то стоит подтянуть к этой интерлюдии анимацию ходьбы в соответствующие моменты, а тут её остановить.
@@ -676,10 +684,10 @@ label din_rolegame_story_interlude:
     din_narrator "И даже не знаю, что маловероятнее."
     #din_narrator "Пришлось многократно моргать, чтобы привести себя в чувство." 
     $ din_blink(2)
-    $ din_unblink("bg ext_road_day", 2)
+    $ din_unblink("bg ext_road_sunset", 2)
 
     $ din_blink(2)
-    $ din_unblink("bg ext_road_day", 2)
+    $ din_unblink("bg ext_road_sunset", 2)
 
     show blink
     $ renpy.pause(2, hard = True)
@@ -690,7 +698,7 @@ label din_rolegame_story_interlude:
     $ renpy.pause(2, hard = True)
 
     $ din_blink(2)
-    $ din_unblink("bg ext_road_day", 2)
+    $ din_unblink("bg ext_road_sunset", 2)
     din_th "Какого черта..."
     din_narrator "Осознание, что и собственным глазам нельзя верить, еще больше дезориентировало."
     din_th "Чудесно. Теперь придется вводить процедуру одобрения того, что я вижу."

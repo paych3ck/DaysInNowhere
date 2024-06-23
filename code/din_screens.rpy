@@ -1180,7 +1180,7 @@ screen din_game_menu_selector():
         imagemap:
             auto din_gui_path + "quick_menu/" + persistent.timeofday + "/quick_menu_%s.png" xalign 0.5 yalign 0.5
 
-            hotspot (0, 83, 660, 65) focus_mask None clicked MainMenu(confirm = True)
+            hotspot (0, 83, 660, 65) focus_mask None clicked [din_set_main_menu_cursor_curried(), MainMenu(confirm=False)]
 
             hotspot (0, 148, 660, 65) focus_mask None clicked ShowMenu("din_save")
 
