@@ -10,15 +10,14 @@ init python:
     din_cells  = din_rows * din_cols
 
     din_gallery_bg_list = [
-        "din_ext_power_line_day", "din_food_normal_sunset", 
-        "din_int_dining_hall_people_sunset", "din_int_dining_hall_sunset_crashed", 
-        "din_int_rpg_dungeon", "din_ext_bar_night",
-        "din_ext_scene_night"
+        'din_ext_camp_plain_sight_sunset', "din_ext_power_line_day",
+        "din_food_normal_sunset", "din_int_dining_hall_people_sunset", 
+        "din_int_dining_hall_sunset_crashed", "din_int_rpg_dungeon", 
+        "din_ext_bar_night", "din_ext_scene_night"
     ]
 
     for bg in din_gallery_bg_list:
         din_g.button(bg)
-        #din_g.image(im.Crop("din/images/bg/" + bg + ".png", (0, 0, 1920, 1080)))
         din_g.image('bg ' + bg)
         din_g.unlock('bg ' + bg)
 
