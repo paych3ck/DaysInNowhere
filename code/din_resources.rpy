@@ -346,6 +346,16 @@ init python:
             if din_hour in hours:
                 return timeofday
 
+    def din_show_titles():
+        renpy.show('din_titles_frame')
+        renpy.with_statement(dissolve)
+        renpy.show_screen("din_titles_overlay", _layer="overlay")
+        renpy.show("din_titles_style din_titles", at_list=[din_titles_anim])
+        renpy.pause(42, hard=True)
+        renpy.hide('din_titles_frame')
+        renpy.with_statement(dissolve)
+        renpy.hide_screen('din_titles_overlay', layer="overlay")
+
     def din_set_main_menu_cursor():
         config.mouse_displayable = MouseDisplayable(din_gui_path + "misc/din_cursor.png", 0, 0)
 
@@ -370,6 +380,7 @@ init:
     $ din_lock_quit = False
     $ din_lock_quick_menu = False
 
+    $ din_take_torch = False
     $ din_take_everything = False
 
     $ din_wiperight = CropMove(.5, "wiperight")
