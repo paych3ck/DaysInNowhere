@@ -8,7 +8,7 @@ label din_intro:
     $ din_set_timeofday_cursor_var = True
     scene bg din_ext_camp_plain_sight_sunset with Dissolve(2)
     play ambience ambience_ext_road_evening fadein 2
-    play music dn_explosions_in_the_sky_your_hand_in_mine fadein 5
+    play music din_explosions_in_the_sky_your_hand_in_mine fadein 5
     din_narrator "В тихом мире закатного горизонта давно уже ничего не происходит."
     din_narrator "То, что когда-то было лагерем, сейчас - лишь бескрайняя пустошь."
     din_narrator "Разве что одинокая дорога рассекает пейзаж."
