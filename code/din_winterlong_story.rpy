@@ -288,6 +288,7 @@ label din_winterlong_story_science:
     din_narrator "Его взгляд проскользил где-то над моей головой, за спину."
     din_teapot "О, это тебя обрадует!"
     din_third "Очень в этом сомневаюсь."
+    stop music fadeout 2
     stop ambience fadeout 2
     scene bg din_fireplace_winterlong_anim with dissolve
     play ambience sfx_forest_fireplace fadein 2
@@ -310,8 +311,6 @@ label din_winterlong_story_science:
     din_pi1 "Еще раз что-то про неё скажешь и я за себя не ручаюсь."
     din_th "Как же неубедительно и безопасно звучал голос «левого». {w}И что это за расплывчатая угроза «за себя не ручаюсь»? Он в приступе злости в дерево врежется?"
     din_pi2 "Ты что, правда веришь в эту тупость? {w}Послушай, твоя ненаглядная с каждым, кого ты сегодня мог встретить, «уединялась» минимум раза..."
-    # ##вспышка, фон стандартной ночной поляны (Третий портировал этих двоих и себя)
-	play music din_argsound_night fadein 5
     stop ambience fadeout 2
     stop sound_loop fadeout 2
     play sound din_portal_use
@@ -320,8 +319,9 @@ label din_winterlong_story_science:
     show din_pi silhouette normal at right as silhouette2
     with flash
     play ambience ambience_forest_night fadein 2
+    play music din_argsound_night fadein 5
     din_th "Отлично, свидетелей теперь нет."
-    din_narrator "Неожиданная смена обстановки заставила их	остановить разговор."
+    din_narrator "Неожиданная смена обстановки заставила их остановить разговор."
     din_narrator "Теперь они, наконец, изволили меня заметить."
     din_third "Прекращайте спор. {w}Продолжите на следующей неделе."
     din_narrator "Но эти двое плохо понимали, что сейчас произойдёт."
@@ -362,7 +362,7 @@ label din_winterlong_story_science:
     din_narrator "Схватив новое оружие, я метнул его прямо под дых, сбивая немногие остатки воздуха."
     din_narrator "Сразу после этого я пригнулся от возможного удара второго."
     din_th "Теперь посмотрим что..."
-	stop music fadeout 4
+    stop music fadeout 2
     ##звук удара, моргание, всё чернеет. **Несмотря на все предосторожности, ГГ вырубили.
     ##тихие звуки хлопков по щекам.
     stop ambience fadeout 2
@@ -411,7 +411,7 @@ label din_winterlong_story_science:
     din_narrator "По мере того, как Неделя Зимы приближалась к концу, все меньше и меньше оставалось мест у костра."
     din_narrator "Все уже обсудили что хотели."
     din_narrator "Сейчас наступала почти ритуальная часть. {w}Все молча садились и смотрели в костёр."
-    din_narrator "Каких-то особых правил на этот счет не было. Просто сложилось, что в конце каждой такой смены все хотели подумать о своём, и нет для этого лучше места, чем рядом с костром и единомышленниками."
+    din_narrator "Каких-то особых правил на этот счет не было. {w}Просто сложилось, что в конце каждой такой смены все хотели подумать о своём, и нет для этого лучше места, чем рядом с костром и единомышленниками."
     din_narrator "Первая фигура легла, задремав на своём месте."
     play sound sfx_bush_body_fall
     $ renpy.pause(0.7, hard=True)

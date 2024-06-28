@@ -381,6 +381,9 @@ init:
     $ din_lock_quick_menu = False
 
     $ din_take_torch = False
+    $ din_take_clock = False
+    $ din_choice_clock = False
+    $ din_choice_wait = False
     $ din_take_everything = False
 
     $ din_wiperight = CropMove(.5, "wiperight")

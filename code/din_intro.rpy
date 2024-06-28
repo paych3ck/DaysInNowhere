@@ -10,7 +10,7 @@ label din_intro:
     play ambience ambience_ext_road_evening fadein 2
     play music din_explosions_in_the_sky_your_hand_in_mine fadein 5
     din_narrator "В тихом мире закатного горизонта давно уже ничего не происходит."
-    din_narrator "То, что когда-то было лагерем, сейчас - лишь бескрайняя пустошь."
+    din_narrator "То, что когда-то было лагерем, сейчас — лишь бескрайняя пустошь."
     din_narrator "Разве что одинокая дорога рассекает пейзаж."
     din_narrator "Когда-то она не смотрелась так одиноко."
     din_narrator "Да и жизнь здесь была иной."
@@ -21,13 +21,15 @@ label din_intro:
     din_narrator "А сейчас эта память медленно утекает, как песок сквозь ладони."
     din_narrator "А потом прозошла случайность."
     ## мелькают фоны из ОУД с эффектом помех
+    scene bg din_int_dining_hall_damaged with flash
     din_narrator "Странная смена со странными событиями."
     din_narrator "Ниточник, кажется так его тогда звали, предпринял новую попытку выхода."
     din_narrator "Эти события я еще помнил хорошо."
     din_narrator "Игра в карты..."
     din_narrator "«Разговор» у костра... "
-    din_narrator "И самое невероятное - его план сработал!"
+    din_narrator "И самое невероятное — его план сработал!"
     din_narrator "Мир, в котом мы провели больше смен, чем звезд на холодном небе, дрогнул."
+    scene bg din_ext_camp_plain_sight_sunset with flash
     din_narrator "Исчез лагерь."
     din_narrator "Исчезло время."
     din_narrator "Исчезли перемены."
