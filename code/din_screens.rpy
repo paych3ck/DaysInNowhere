@@ -11,9 +11,13 @@ init python:
 
     din_gallery_bg_list = [
         'din_ext_camp_plain_sight_sunset', "din_ext_power_line_day",
+        "din_ext_power_line_sunset", "din_int_dining_hall_sunset",
         "din_food_normal_sunset", "din_int_dining_hall_people_sunset", 
         "din_int_dining_hall_sunset_crashed", "din_int_rpg_dungeon", 
-        "din_ext_bar_night", "din_ext_scene_night"
+        "din_ext_bar_night", "din_ext_scene_night",
+        "din_ext_camp_entrance_night", "din_ext_camp_entrance_old",
+        "din_ext_clubs_sunset", "din_ext_musclub_sunset"
+
     ]
 
     for bg in din_gallery_bg_list:
@@ -33,6 +37,18 @@ init python:
     din_music_box = {
         "God Is An Astronaut — Tempus Horizon": din_god_is_an_astronaut_tempus_horizon,
         "The last days — The Time Will Never Come Back": din_the_last_days_the_time_will_never_come_back,
+        "Argsound — Night": din_argsound_night,
+        "DWTD — Eyes Of Madness": din_dance_with_the_dead_eyes_of_madness,
+        "El Huervo — Daisuke": din_el_huervo_daisuke,
+        "Experia — Smoke And Ashes": din_experia_smoke_and_ashes,
+        "Explosions In The Sky — Your Hand In Mine": din_explosions_in_the_sky_your_hand_in_mine,
+        "God Is An Astronaut — Falling Leaves": din_god_is_an_astronaut_falling_leaves,
+        "God Is An Astronaut — First Day Of Sun": din_god_is_an_astronaut_first_day_of_sun,
+        "God Is An Astronaut — Suicide By Star": din_god_is_an_astronaut_suicide_by_star,
+        "H.1 — Timeless": din_h1_timeless,
+        "Higurashi When They Cry — Chiyouraiki No Sora": din_higurashi_when_they_cry_chiyouraiki_no_sora,
+        "Out Of Sight — Reasons": din_out_of_sight_reasons,
+        "Pillars Of Eternity — Elmshore": din_pillars_of_eternity_elmshore
     }
 
     din_mr = MusicRoom(fadeout=1.0)
@@ -374,7 +390,7 @@ screen din_background_gallery():
             ypos 970
             action [Hide('din_background_gallery'), ShowMenu('din_extra')]
 
-        grid din_rows din_cols xpos 0.09 ypos 0.18:
+        grid din_rows din_cols xpos 0.1 ypos 0.18:
             $ din_bg_displayed = 0
             $ din_next_page = din_page + 1
 
