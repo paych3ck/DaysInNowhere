@@ -70,9 +70,6 @@ label din_ikarus_story:
     din_nit "А это ты узнаешь в следующий раз."
     din_teapot "С какого такого перепуг..."
     hide din_nit with dissolve
-    ## Внизу важный коммент \..\
-    ##надо поискать код, чтобы менялась анимация посреди фразы
-    ##антизум, постоянное резкое шатание камеры, звук ветра
     play sound sfx_wind_gust
     scene bg din_ext_power_line_day:
         xalign 0.5

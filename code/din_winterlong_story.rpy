@@ -138,7 +138,7 @@ label din_winterlong_story:
     
 label din_winterlong_story_bar:
     din_th "Возможно, стоило бы отказаться от алкоголя. {w}Хотя бы на эмоциональные праздники."
-    din_th "С другой стороны, сколько выпивка вызывает истерик, столько и останавливает."# В конце концов, на общее число она не влияет."
+    din_th "С другой стороны, сколько выпивка вызывает истерик, столько и останавливает."
     din_th "Да и не в моих это привычках - решать за других."
     stop ambience fadeout 2
     scene bg din_ext_bar_night 
@@ -304,8 +304,8 @@ label din_winterlong_story_science:
     din_narrator "За то время, что мы шли, эти двое уже стали кричать друг на друга. Пока внимания они не привлекали, но это временно."
     din_narrator "Моё желание улаживать детские разборки измерялось отрицательными числами, но статус обязывал."
     din_th "Сколько раз повторять: ЛЮБОЕ насилие сегодня запрещено! Но нет, всега найдется новичок, который посчитает себя выше правил!"   
-    show din_pi silhouette normal at left as silhouette1
-    show din_pi silhouette normal at right as silhouette2
+    show din_pi silhouette normal at left as din_silhouette1
+    show din_pi silhouette normal at right as din_silhouette2
     with dissolve
     din_narrator "Я остановился за пять шагов от них, но меня всё равно не заметили. Шорох за спиной подсказывал, что Чайник не отстал."
     din_pi1 "Еще раз что-то про неё скажешь и я за себя не ручаюсь."
@@ -315,11 +315,11 @@ label din_winterlong_story_science:
     stop sound_loop fadeout 2
     play sound din_portal_use
     scene bg ext_polyana_night
-    show din_pi silhouette normal at left as silhouette1
-    show din_pi silhouette normal at right as silhouette2
+    show din_pi silhouette normal at left as din_silhouette1
+    show din_pi silhouette normal at right as din_silhouette2
     with flash
     play ambience ambience_forest_night fadein 2
-    play music din_argsound_night fadein 5
+    play music din_argsound_night fadein 2
     din_th "Отлично, свидетелей теперь нет."
     din_narrator "Неожиданная смена обстановки заставила их остановить разговор."
     din_narrator "Теперь они, наконец, изволили меня заметить."
@@ -363,18 +363,19 @@ label din_winterlong_story_science:
     din_narrator "Сразу после этого я пригнулся от возможного удара второго."
     din_th "Теперь посмотрим что..."
     stop music fadeout 2
-    ##звук удара, моргание, всё чернеет. **Несмотря на все предосторожности, ГГ вырубили.
-    ##тихие звуки хлопков по щекам.
+    play sound sfx_punch_washstand
     stop ambience fadeout 2
     $ din_blink(2)
     $ renpy.pause(3, hard=True)
     play ambience ambience_forest_night fadein 2
-    $ din_unblink('bg ext_polyana_night', 2) #заблюреная поляна
+    play sound sfx_face_slap
+    $ din_unblink('bg din_ext_polyana_night_blurred', 2)
     din_narrator "Спина мёрзнет. Как бы не простыть."
     din_narrator "Стоп, что произошло?"
     din_narrator "Кто-то назойливо хлопал ладонями по моим щекам."
-    # разблюреная поляна
-    show din_hall pos2 smile2 at center with dissolve
+    scene bg ext_polyana_night
+    show din_hall pos2 smile2 at center
+    with dissolve
     din_teapot "Вставай-вставай-вставай-вставай."
     din_th "Да что за!.."
     din_narrator "После того, как я рывком перешел в сидячее положение, ощутились изменения."

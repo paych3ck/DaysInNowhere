@@ -69,6 +69,10 @@ init python:
     din_names["din_pi2"] = "Пионер"
     store.din_names_list.append("din_pi2")
 
+    din_colors["din_pi3"] = {"speaker_color": (24, 115, 185)}
+    din_names["din_pi3"] = "Пионер"
+    store.din_names_list.append("din_pi3")
+
     din_colors["din_pi_generic"] = {"speaker_color": (94, 91, 90)}
     din_names["din_pi_generic"] = "Пионер"
     store.din_names_list.append("din_pi_generic")
@@ -351,7 +355,7 @@ init python:
         renpy.with_statement(dissolve)
         renpy.show_screen("din_titles_overlay", _layer="overlay")
         renpy.show("din_titles_style din_titles", at_list=[din_titles_anim])
-        renpy.pause(42, hard=True)
+        renpy.pause(30, hard=True)
         renpy.hide('din_titles_frame')
         renpy.with_statement(dissolve)
         renpy.hide_screen('din_titles_overlay', layer="overlay")
@@ -375,6 +379,9 @@ init python:
     din_set_null_cursor_curried = renpy.curry(din_set_null_cursor)
 
 init:
+    $ din_titles = '''{b}Спасибо, что снова читаете мод нашей команды!{/b}
+    Не смотря ни на что, мы хотим создавать что-то новое, непохожее и нетипичное для мастерской.\n\nЭкспериментировать, воплощать и развивать идеи, которые откликаются людям. И если наш мод как-то в вас откликнулся, то дайте нам знать!\n\nВаша поддержка, даже в форме простого комментария ''Хороший мод, жду нового!'' действительно очень помогает нам. Каждый раз, когда мы видим подобное, в наших чатах случается подъем боевого духа и желания сворачивать горы)\n\nНад модом работали:\nSeeker - автор идеи, сценарист.\n\nАндрей Катаев - основой код, дизайн интерфейса.\n\nДаниил Бухичевский - помощь с текстом.\n\nЕгорыч - работа над визуальной составляющей.\n\nДарья Исаева - помощь с визуальной составляющей и вычитка текста.\n\nD_SMILE - художник фонов.\n\nCloudy - художник спрайтов\n\nБлагодарим тех, кто поддерживал нас финансово:\nГригорий Григорьев\n\nНикита Берлов\n\nИлья Можайкин\n\nМаксим Куттер\n\nПионер Пионерович\n\nРуслан Власов\n\nТак или иначе, спасибо за уделённое нам время! Этот мод - далеко не конец. Мы не собираемся останавливаться. Следите за анонсами. С уважением, Zero Impact.'''
+
     $ din_main_menu_var = True
     $ din_lock_quit_game_main_menu_var = True
     $ din_lock_quit = False
@@ -458,6 +465,7 @@ init:
     image din_main_menu_night_anim = din_frame_animation("din/images/gui/main_menu/night/din_night", 5, 4, True, Dissolve(2))
     image din_main_menu_sunset_anim = din_frame_animation("din/images/gui/main_menu/sunset/din_sunset", 5, 4, True, Dissolve(2))
     image din_main_menu_morning_anim = din_frame_animation("din/images/gui/main_menu/morning/din_morning", 5, 4, True, Dissolve(2))
+    image bg din_ext_polyana_night_blurred = im.Blur("images/bg/ext_polyana_night.jpg", 1.5)
 
     image din_gensek silhouette normal = im.MatrixColor("din/images/sprites/gensek/normal/din_gensek stay normal.png", im.matrix.tint(0, 0, 0))
     image din_nuts silhouette normal = im.MatrixColor("din/images/sprites/nuts/normal/din_nuts normal.png", im.matrix.tint(0, 0, 0))
@@ -466,6 +474,8 @@ init:
     image din_nit silhouette normal_r = im.MatrixColor("din/images/sprites/nit/normal/din_nit normal_r.png", im.matrix.tint(0, 0, 0))
 
     image din_blank_skip = renpy.display.behavior.ImageButton(Null(1920, 1080), Null(1920, 1080), clicked=[Jump('din_after_intro')])
+
+    image din_titles_style = ParameterizedText(style="din_titles_style", size=40, xalign=0.5)
 
     image din_nit_alpha_anim:
         "din_nit normal_r"
@@ -503,6 +513,14 @@ init:
     transform din_portal_using_zoom():
         xalign 0.5 yalign 0.5 zoom 1.0
         linear 0.5 zoom 2 xalign 0.5 yalign 0.5
+
+    transform din_titles_anim():
+        xalign 0.5
+        ypos 1.1
+        linear 48 ypos -4.0
+
+    transform din_moveinbottom():
+        linear 0.5 ypos 1300
 
     transform din_zoom_in_center():
         xalign 0.5 yalign 0.5 zoom 1.0

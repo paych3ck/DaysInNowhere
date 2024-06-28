@@ -6,6 +6,16 @@ init python:
     din_main_font = "fonts/calibri.ttf"
     din_main_menu_font = din_gui_path + "fonts/AG_Futura Regular.ttf"
 
+    style.din_titles_style = Style(style.default)
+    style.din_titles_style.font = din_link_font
+    style.din_titles_style.color = "#fff"
+    style.din_titles_style.drop_shadow = [(1, 1), (1, 1), (1, 1), (1, 1)]
+    style.din_titles_style.drop_shadow_color = "#000"
+    style.din_titles_style.italic = False
+    style.din_titles_style.bold = False
+    style.din_titles_style.text_align = 0.5
+    style.din_titles_style.xmaximum = 0.8
+
     style.din_story_label = Style(style.default)
     style.din_story_label.font = din_main_menu_font
     style.din_story_label.size = 70

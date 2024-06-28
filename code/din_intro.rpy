@@ -20,7 +20,6 @@ label din_intro:
     din_narrator "Я видел, как Пионеры менялись, развивались или застывали во времени, отказываясь двигаться дальше."
     din_narrator "А сейчас эта память медленно утекает, как песок сквозь ладони."
     din_narrator "А потом прозошла случайность."
-    ## мелькают фоны из ОУД с эффектом помех
     stop ambience fadeout 2
     $ renpy.block_rollback()
     $ persistent.sprite_time = "night"
@@ -31,12 +30,12 @@ label din_intro:
     din_narrator "Странная смена со странными событиями."
     din_narrator "Ниточник, кажется так его тогда звали, предпринял новую попытку выхода."
     din_narrator "Эти события я еще помнил хорошо."
-    show osd_hall pos2 normal_burns at left behind prologue_dream
-    show osd_nit bulging3_l at right behind prologue_dream
+    show din_hall pos2 normal_burns at left behind prologue_dream
+    show din_nit bulging3_l at right behind prologue_dream
     with dissolve
     din_narrator "Игра в карты..."
     scene bg din_fireplace_anim
-    show osd_nit normal_r at left
+    show din_nit normal_r at left
     show prologue_dream
     with flash
     din_narrator "«Разговор» у костра..."
@@ -44,7 +43,7 @@ label din_intro:
     scene bg ext_camp_entrance_day
     $ persistent.sprite_time = "day"
     $ persistent.timeofday = "day"
-    show osd_nit normal_r at center
+    show din_nit normal_r at center
     show prologue_dream
     with flash
     din_narrator "И самое невероятное — его план сработал!"

@@ -1431,3 +1431,67 @@ screen din_help():
 
 screen din_ignore_button():
     key "game_menu" action NullAction()
+
+screen din_titles_overlay():
+    key "game_menu":
+        action NullAction()
+        
+    key "K_F1":
+        action NullAction()
+        
+    key "K_SCROLLOCK":
+        action NullAction()
+        
+    key "mouseup_3":
+        action NullAction()
+        
+    key "mouseup_4":
+        action NullAction()
+        
+    key "K_PAGEUP":
+        action NullAction()
+    
+    key "repeat_K_PAGEUP":
+        action NullAction()
+    
+    key "K_AC_BACK":
+        action NullAction()
+
+    key "mouseup_2":
+        action NullAction()
+
+    key "h":
+        action NullAction()
+
+    key "mouseup_1":
+        action NullAction()
+
+    key "K_RETURN":
+        action NullAction()
+
+    key "K_SPACE":
+        action NullAction()
+
+    key "K_KP_ENTER":
+        action NullAction()
+
+    key "K_SELECT":
+        action NullAction()
+
+    key "K_LCTRL":
+        action NullAction()
+
+    key "K_RCTRL":
+        action NullAction() 
+        
+    key "joy_holdskip":
+        action NullAction()
+
+    key "K_TAB":
+        action NullAction() 
+        
+    key "joy_toggleskip":
+        action NullAction()
+
+    key ">":
+        action NullAction()
