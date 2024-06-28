@@ -463,8 +463,26 @@ init:
     image din_nuts silhouette normal = im.MatrixColor("din/images/sprites/nuts/normal/din_nuts normal.png", im.matrix.tint(0, 0, 0))
     image din_pi silhouette normal = im.MatrixColor("din/images/sprites/pi/normal/din_pi normal.png", im.matrix.tint(0, 0, 0))
     image din_nit silhouette normal = im.MatrixColor("din/images/sprites/nit/normal/din_nit bulging3_r.png", im.matrix.tint(0, 0, 0))
+    image din_nit silhouette normal_r = im.MatrixColor("din/images/sprites/nit/normal/din_nit normal_r.png", im.matrix.tint(0, 0, 0))
 
     image din_blank_skip = renpy.display.behavior.ImageButton(Null(1920, 1080), Null(1920, 1080), clicked=[Jump('din_after_intro')])
+
+    image din_nit_alpha_anim:
+        "din_nit normal_r"
+        pause 0.5
+        linear 0.8 alpha 1.0
+        pause 0.2
+        linear 1.0 alpha 0.0
+        repeat
+
+    image din_nit_darklight_anim:
+        "din_nit normal_r"
+        pause 0.8
+        "din_nit silhouette normal_r" with Dissolve(0.4)
+        pause 0.8
+        "din_nit normal_r" with Dissolve(0.4)
+        pause 0.8
+        repeat
 
     transform din_buttons_atl():
         on idle:
