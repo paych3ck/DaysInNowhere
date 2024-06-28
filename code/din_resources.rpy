@@ -451,6 +451,7 @@ init:
     image din_interlude_frame = DinBlackRectangle(width=630, height=290, alpha=0.5)
 
     image bg din_stars_anim = din_frame_animation("din/images/bg/din_stars_anim/din_stars", 2, 1.5, True, Dissolve(1.5))
+    image bg din_fireplace_anim = din_frame_animation("din/images/bg/din_fireplace_anim/din_fireplace", 10, 1.8, True, Dissolve(1.2))
     image bg din_fireplace_winterlong_anim = din_frame_animation("din/images/bg/din_fireplace_winterlong_anim/din_fireplace_winterlong", 10, 1.8, True, Dissolve(1.2))
     image bg din_stars_bush_anim = din_frame_animation('din/images/bg/din_stars_bush_anim/din_stars_bush', 15, 1.8, True, Dissolve(1.2))
     image din_main_menu_day_anim = din_frame_animation("din/images/gui/main_menu/day/din_day", 5, 4, True, Dissolve(2))
@@ -461,6 +462,7 @@ init:
     image din_gensek silhouette normal = im.MatrixColor("din/images/sprites/gensek/normal/din_gensek stay normal.png", im.matrix.tint(0, 0, 0))
     image din_nuts silhouette normal = im.MatrixColor("din/images/sprites/nuts/normal/din_nuts normal.png", im.matrix.tint(0, 0, 0))
     image din_pi silhouette normal = im.MatrixColor("din/images/sprites/pi/normal/din_pi normal.png", im.matrix.tint(0, 0, 0))
+    image din_nit silhouette normal = im.MatrixColor("din/images/sprites/nit/normal/din_nit bulging3_r.png", im.matrix.tint(0, 0, 0))
 
     image din_blank_skip = renpy.display.behavior.ImageButton(Null(1920, 1080), Null(1920, 1080), clicked=[Jump('din_after_intro')])
 

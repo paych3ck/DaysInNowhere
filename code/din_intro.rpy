@@ -21,15 +21,38 @@ label din_intro:
     din_narrator "А сейчас эта память медленно утекает, как песок сквозь ладони."
     din_narrator "А потом прозошла случайность."
     ## мелькают фоны из ОУД с эффектом помех
-    scene bg din_int_dining_hall_damaged with flash
+    stop ambience fadeout 2
+    $ renpy.block_rollback()
+    $ persistent.sprite_time = "night"
+    $ persistent.timeofday = "night"
+    scene bg din_int_dining_hall_damaged 
+    show prologue_dream
+    with flash
     din_narrator "Странная смена со странными событиями."
     din_narrator "Ниточник, кажется так его тогда звали, предпринял новую попытку выхода."
     din_narrator "Эти события я еще помнил хорошо."
+    show osd_hall pos2 normal_burns at left behind prologue_dream
+    show osd_nit bulging3_l at right behind prologue_dream
+    with dissolve
     din_narrator "Игра в карты..."
-    din_narrator "«Разговор» у костра... "
+    scene bg din_fireplace_anim
+    show osd_nit normal_r at left
+    show prologue_dream
+    with flash
+    din_narrator "«Разговор» у костра..."
+    $ renpy.block_rollback()
+    scene bg ext_camp_entrance_day
+    $ persistent.sprite_time = "day"
+    $ persistent.timeofday = "day"
+    show osd_nit normal_r at center
+    show prologue_dream
+    with flash
     din_narrator "И самое невероятное — его план сработал!"
     din_narrator "Мир, в котом мы провели больше смен, чем звезд на холодном небе, дрогнул."
     scene bg din_ext_camp_plain_sight_sunset with flash
+    $ renpy.block_rollback()
+    $ persistent.sprite_time = "sunset"
+    $ persistent.timeofday = "sunset"
     din_narrator "Исчез лагерь."
     din_narrator "Исчезло время."
     din_narrator "Исчезли перемены."
