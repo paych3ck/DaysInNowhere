@@ -863,20 +863,22 @@ label din_rolegame_story_interlude:
     din_nit_he "Да. {w}Нам."
     din_nit_he "Вижу, ты уже это ощутил."
     din_nit_he "Но есть одно ограничение. {w}Взгляни сюда."
-    scene bg din_ext_camp_entrance_night 
-    show din_nit normal_r at center
-    with dissolve
+    scene bg din_ext_camp_entrance_night with dissolve
     din_narrator "Ниточник повернулся к воротам."
     ## запускай ООООЧЕНЬ медленный фейдин фона старого лагеря
+    scene bg din_ext_camp_entrance_mixed with Dissolve(2)
     din_narrator "Повинуясь его воле, она дрогнула, и начала медленно меняться."
     din_third_i "Неплохо."
     din_narrator "Ниточник продолжал смотреть, как в воздухе формируются ржавые ворота."
     din_third_i "Сколько это займет?"
     din_narrator "Он не отвечал."
-    ## На секунду фон старого лагеря становится яснее, а затем исчезает.
+    scene bg din_ext_camp_entrance_old with flash
+    $ renpy.pause(1, hard=True)
+    scene bg din_ext_camp_entrance_night with flash
     din_narrator "Наваждение снова дрогнуло. И развеялось, будто ничего и не было."
     din_narrator "Хоть он был повёрнут ко мне спиной, я {i}почувствовал{/i}, что по его лбу скатилась капля пота."
     din_narrator "Вдруг он повернулся ко мне."
+    show din_nit normal_r at center with dissolve
     din_nit_he "Лагерь гораздо продуманнее, чем я ожидал, Третий."
     din_narrator "Хоть он и старался держать голос, будто ни в чём не бывало, ощущалось, будто он прячет отдышку."
     din_nit_he "Он создан, чтобы перезапускаться, восстанавливатся. И отчаянно сопротивляется нашим попыткам его перекроить."
