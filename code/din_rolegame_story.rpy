@@ -985,7 +985,6 @@ label din_rolegame_story_interlude:
     din_nit_he "Да."
     din_nit_he "Прощай, Третий."
     din_third_i "Прощай, {w}Ниточник."
-    $ renpy.pause(3, hard=True)
     $ din_show_titles()
     stop music fadeout 2
     stop ambience fadeout 2
