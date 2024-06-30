@@ -19,7 +19,7 @@ label din_intro:
     din_narrator "Мог не задумываясь сказать кто как проводит своё время и сколько ему осталось до сумашествия."
     din_narrator "Я видел, как Пионеры менялись, развивались или застывали во времени, отказываясь двигаться дальше."
     din_narrator "А сейчас эта память медленно утекает, как песок сквозь ладони."
-    din_narrator "А потом прозошла случайность."
+    din_narrator "А потом произошла случайность."
     stop ambience fadeout 2
     $ renpy.block_rollback()
     $ persistent.sprite_time = "night"
@@ -47,7 +47,7 @@ label din_intro:
     show prologue_dream
     with flash
     din_narrator "И самое невероятное — его план сработал!"
-    din_narrator "Мир, в котом мы провели больше смен, чем звезд на холодном небе, дрогнул."
+    din_narrator "Мир, в котором мы провели больше смен, чем звезд на холодном небе, дрогнул."
     scene bg din_ext_camp_plain_sight_sunset with flash
     $ renpy.block_rollback()
     $ persistent.sprite_time = "sunset"

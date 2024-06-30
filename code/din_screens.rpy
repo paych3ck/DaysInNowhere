@@ -16,7 +16,8 @@ init python:
         "din_int_dining_hall_sunset_crashed", "din_int_rpg_dungeon", 
         "din_ext_bar_night", "din_ext_scene_night",
         "din_ext_camp_entrance_night", "din_ext_camp_entrance_old",
-        "din_ext_clubs_sunset", "din_ext_musclub_sunset"
+        "din_ext_clubs_sunset", "din_ext_musclub_sunset",
+        "din_space"
 
     ]
 
@@ -26,7 +27,7 @@ init python:
         din_g.unlock('bg ' + bg)
 
     din_gallery_animated_bg_list = [
-        'din_stars_anim', 'din_fireplace_winterlong_anim', 'din_stars_bush_anim'
+        'din_fireplace_winterlong_anim', 'din_stars_bush_anim'
     ]
 
     for animated_bg in din_gallery_animated_bg_list:

@@ -456,8 +456,7 @@ init:
 
     image din_story_frame = DinBlackRectangle(width=630, height=240, alpha=0.5)
     image din_interlude_frame = DinBlackRectangle(width=630, height=290, alpha=0.5)
-
-    image bg din_stars_anim = din_frame_animation("din/images/bg/din_stars_anim/din_stars", 2, 1.5, True, Dissolve(1.5))
+    
     image bg din_fireplace_anim = din_frame_animation("din/images/bg/din_fireplace_anim/din_fireplace", 10, 1.8, True, Dissolve(1.2))
     image bg din_fireplace_winterlong_anim = din_frame_animation("din/images/bg/din_fireplace_winterlong_anim/din_fireplace_winterlong", 10, 1.8, True, Dissolve(1.2))
     image bg din_stars_bush_anim = din_frame_animation('din/images/bg/din_stars_bush_anim/din_stars_bush', 15, 1.8, True, Dissolve(1.2))
