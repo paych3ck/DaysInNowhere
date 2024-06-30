@@ -223,9 +223,9 @@ init python:
     def din_get_char_sprites(char):
         sprite_names = []
 
-        for root, dirs, files in os.walk('game/din/images/sprites/' + char):
-            for sprite in files:
-                sprite_names.append(sprite[:-4])
+        for image in renpy.list_images():
+            if image.startswith('din_{} '.format(char)):
+                sprite_names.append(image)
 
         return sprite_names
 
