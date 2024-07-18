@@ -31,6 +31,7 @@ init python:
             renpy.display.screen.screens[("din_old_" + screen_name, None)] = renpy.display.screen.screens[(screen_name, None)]
         
     def din_screens_act():
+        persistent.timeofday = 'day'
         config.window_title = u"Дни нигде"
         config.name = "Days_In_Nowhere"
         config.version = "1.0"
