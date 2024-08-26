@@ -137,29 +137,26 @@ screen din_story_choice():
 
     add 'din_stories_all_closed'
 
-    add 'din_ikarus_story_hover'
-
-    imagebutton:
+    din_transition_imagebutton:
         idle 'din_ikarus_story_idle'
-        at din_buttons_transition
+        hover 'din_ikarus_story_hover'
+        transition Dissolve(1.5)
         action [Hide('din_story_choice', Dissolve(1.5)), Start("din_ikarus_story")]
 
     if persistent.din_flags['din_ikarus_story_completed']:
-        add 'din_winterlong_story_hover' xpos 639
-
-        imagebutton:
+        din_transition_imagebutton:
             idle 'din_winterlong_story_idle'
+            hover 'din_winterlong_story_hover'
             xpos 639
-            at din_buttons_transition
+            transition Dissolve(1.5)
             action [Hide('din_story_choice', Dissolve(1.5)), Start("din_winterlong_story")]
 
     if persistent.din_flags['din_winterlong_story_completed']:
-        add 'din_rolegame_story_hover' xpos 1253
-
-        imagebutton:
+        din_transition_imagebutton:
             idle 'din_rolegame_story_idle' 
+            hover 'din_rolegame_story_hover'
             xpos 1253
-            at din_buttons_transition
+            transition Dissolve(1.5)
             action [Hide('din_story_choice', Dissolve(1.5)), Start("din_rolegame_story")]
 
     imagebutton:
